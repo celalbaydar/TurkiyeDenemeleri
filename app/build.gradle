@@ -5,6 +5,11 @@ android {
     buildToolsVersion "25.0.1"
     defaultConfig {
         applicationId "com.turkiyedenemeleri"
+
+        manifestPlaceholders = [onesignal_app_id: "998f3edb-b092-4272-a75c-9d1b5e7e668f",
+                                // Project number pulled from dashboard, local value is ignored.
+                                onesignal_google_project_number: "REMOTE"]
+
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 1
@@ -29,5 +34,9 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     compile 'com.android.support:design:25.3.1'
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'com.onesignal:OneSignal:3.+@aar'
+    compile 'com.google.android.gms:play-services-gcm:+'
+    compile "com.google.android.gms:play-services-location:+"
 
 }
