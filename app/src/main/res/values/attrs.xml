@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TDTextView">
+        <attr name="tvFontName" format="string"/>
+    </declare-styleable>
+    <declare-styleable name="TDButton">
+        <attr name="btFontName" format="string"/>
+    </declare-styleable>
+    <declare-styleable name="TDCheckBox">
+        <attr name="cbFontName" format="string"/>
+    </declare-styleable>
+    <declare-styleable name="TDEdittext">
+        <attr name="etFontName" format="string"/>
+    </declare-styleable>
+
+</resources>
