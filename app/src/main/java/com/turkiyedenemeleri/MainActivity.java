@@ -1,13 +1,30 @@
 package com.turkiyedenemeleri;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 
-public class MainActivity extends AppCompatActivity {
+import com.turkiyedenemeleri.base.BaseActivity;
+
+public class MainActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setTitle("Deneme");
+    }
+
+    @Override
+    protected void setInitialValues() {
+
+    }
+
+    @Override
+    protected void initViews() {
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_main;
     }
 }
