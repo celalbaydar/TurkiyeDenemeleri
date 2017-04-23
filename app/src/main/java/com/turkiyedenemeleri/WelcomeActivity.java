@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.method.LinkMovementMethod;
-import android.widget.Toast;
 
 import com.digits.sdk.android.AuthCallback;
 import com.digits.sdk.android.Digits;
@@ -59,8 +58,8 @@ public class WelcomeActivity extends BaseActivity {
         digitsButton.setCallback(new AuthCallback() {
             @Override
             public void success(DigitsSession session, String phoneNumber) {
-                Toast.makeText(getApplicationContext(), "Authentication successful for "
-                        + phoneNumber, Toast.LENGTH_LONG).show();
+                //phone deleted +9
+                new RetrofitHelper().addUser(phoneNumber.substring(2),MyApp.loggedUserId);
             }
             @Override
             public void failure(DigitsException exception) {

@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class ServiceGenerator {
-    private static final String BASE_URL = "http://45.55.219.42/TurkiyeDenemeleri";
+    private static final String BASE_URL = "http://45.55.219.42/TurkiyeDenemeleri/";
 
     private static Retrofit.Builder builder =
             new Retrofit.Builder()

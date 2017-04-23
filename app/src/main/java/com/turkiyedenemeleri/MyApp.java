@@ -9,10 +9,12 @@ import com.onesignal.OneSignal;
  */
 
 public class MyApp extends Application {
+    public static String loggedUserId=null;
+
     @Override
     public void onCreate() {
         super.onCreate();
         OneSignal.startInit(this).init();
-        
+        OneSignal.idsAvailable((userId, registrationId) -> loggedUserId=userId);
     }
 }
