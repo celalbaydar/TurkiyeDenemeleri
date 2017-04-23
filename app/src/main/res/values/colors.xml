@@ -4,6 +4,27 @@
     <color name="colorPrimaryDark">#9b0000</color>
     <color name="colorAccent">#ff5131</color>
 
+
+    <color name="green100">#C8E6C9</color>
+    <color name="green200">#A5D6A7</color>
+    <color name="green300">#81C784</color>
+    <color name="green400">#66BB6A</color>
+    <color name="green500">#4CAF50</color>
+    <color name="green600">#43A047</color>
+    <color name="green700">#388E3C</color>
+    <color name="green800">#2E7D32</color>
+
+    <color name="btn_green_normal">#ff20c659</color>
+    <color name="btn_green_pressed">#ff1aa94c</color>
+    <color name="section_text">#ff00897b</color>
+
+
+
+
+
+
+
+
     <color name="white">#ffff</color>
 
 

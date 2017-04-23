@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background=""
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical">
+
+        <com.turkiyedenemeleri.customviews.TDTextView
+            android:id="@+id/TDtv_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:linksClickable="true"
+            android:text="@string/acceptTD"
+            android:textSize="@dimen/font_medium"
+            app:tvFontName="Regular.otf" />
+
+        <com.turkiyedenemeleri.customviews.TDButton
+            android:id="@+id/regisbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="#4CAF50"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/accaptandcontinue"
+            android:textSize="@dimen/font_btn" />
+
+        <com.digits.sdk.android.DigitsAuthButton
+            android:visibility="gone"
+            android:id="@+id/auth_button"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="#4CAF50"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/accaptandcontinue"
+            android:textSize="@dimen/font_btn" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ill_eula" />
+
+    <com.turkiyedenemeleri.customviews.TDTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="10dp"
+        android:text="@string/welcomeMessage"
+        android:textColor="@color/section_text"
+        android:textSize="@dimen/font_xxlarge"
+        app:tvFontName="Regular.otf" />
+
+
+</FrameLayout>

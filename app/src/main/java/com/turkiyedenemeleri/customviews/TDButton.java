@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 
 import com.turkiyedenemeleri.R;
 
+
 /**
  * Created by safakesberk on 22/04/2017.
  */
