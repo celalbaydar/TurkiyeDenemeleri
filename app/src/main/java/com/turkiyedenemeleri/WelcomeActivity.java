@@ -15,10 +15,10 @@ import com.digits.sdk.android.DigitsSession;
 import com.turkiyedenemeleri.app.MyApp;
 import com.turkiyedenemeleri.base.BaseActivity;
 import com.turkiyedenemeleri.customviews.TDTextView;
-import com.turkiyedenemeleri.model.MyHttpResponse;
 import com.turkiyedenemeleri.model.User;
 import com.turkiyedenemeleri.presenter.WelcomePresenter;
 import com.turkiyedenemeleri.presenter.contract.WelcomeContract;
+import com.turkiyedenemeleri.util.DialogUtil;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterCore;
 
@@ -68,7 +68,7 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
             public void success(DigitsSession session, String phoneNumber) {
                 //phone deleted +9
                 //new RetrofitHelper().addUser(phoneNumber.substring(2), MyApp.loggedUserId);
-                mPresenter.addUser(phoneNumber.substring(2), MyApp.loggedUserId);
+                mPresenter.addUser(phoneNumber.substring(3), MyApp.loggedUserId);
             }
             @Override
             public void failure(DigitsException exception) {
@@ -121,13 +121,13 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
     }
 
     @Override
-    public void showError(String msg) {
-
+    public void showError(int errorCode,String msg) {
+        DialogUtil.addErrorDialog(this,"Oppppsss",msg).show();
     }
 
     @Override
-    public void chekUserResponse(MyHttpResponse<User> user) {
-        Log.d("deneme", String.valueOf(user.getResponseType()));
-        Log.d("deneme",user.getData().getTelefon());
+    public void chekUserResponse(User user) {
+        Log.d("deneme", String.valueOf(user.getTelefon()));
+        Log.d("deneme", String.valueOf(user.getIl()));
     }
 }

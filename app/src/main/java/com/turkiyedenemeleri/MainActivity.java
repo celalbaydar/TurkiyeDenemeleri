@@ -32,7 +32,7 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    public void showError(String msg) {
+    public void showError(int errorCode,String msg) {
 
     }
 }

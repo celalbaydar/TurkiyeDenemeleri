@@ -6,6 +6,6 @@ package com.turkiyedenemeleri.base;
  */
 public interface BaseView {
 
-    void showError(String msg);
+    void showError(int errorCode,String msg);
 
 }

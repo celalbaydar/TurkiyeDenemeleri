@@ -8,19 +8,19 @@ import io.reactivex.disposables.Disposable;
 public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
 
     protected T mView;
-    protected CompositeDisposable mCompositeSubscription;
+    protected CompositeDisposable mCompositeDisposable;
 
     protected void unSubscribe() {
-        if (mCompositeSubscription != null) {
-            mCompositeSubscription.clear();
+        if (mCompositeDisposable != null) {
+            mCompositeDisposable.clear();
         }
     }
 
     protected void addSubscrebe(Disposable subscription) {
-        if (mCompositeSubscription == null) {
-            mCompositeSubscription = new CompositeDisposable();
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = new CompositeDisposable();
         }
-        mCompositeSubscription.add(subscription);
+        mCompositeDisposable.add(subscription);
     }
 
     @Override

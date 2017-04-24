@@ -2,7 +2,6 @@ package com.turkiyedenemeleri.presenter.contract;
 
 import com.turkiyedenemeleri.base.BasePresenter;
 import com.turkiyedenemeleri.base.BaseView;
-import com.turkiyedenemeleri.model.MyHttpResponse;
 import com.turkiyedenemeleri.model.User;
 
 /**
@@ -11,12 +10,10 @@ import com.turkiyedenemeleri.model.User;
 
 public interface WelcomeContract {
     interface View extends BaseView {
+        void chekUserResponse(User user);
 
-        void chekUserResponse(MyHttpResponse<User> user);
     }
-
     interface Presenter extends BasePresenter<View> {
-
         void addUser(String phoneNumber,String token);
     }
 }
