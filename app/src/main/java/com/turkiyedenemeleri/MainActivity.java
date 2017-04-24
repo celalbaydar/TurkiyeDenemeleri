@@ -30,4 +30,9 @@ public class MainActivity extends BaseActivity {
     public int getLayoutId() {
         return R.layout.activity_main;
     }
+
+    @Override
+    public void showError(String msg) {
+
+    }
 }

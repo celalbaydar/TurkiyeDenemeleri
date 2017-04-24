@@ -25,10 +25,13 @@ import butterknife.Unbinder;
  * Created by safakesberk on 22/04/2017.
  */
 
-public abstract class BaseActivity extends AppCompatActivity implements ActionBarView{
+public abstract class BaseActivity <T extends BasePresenter> extends AppCompatActivity implements ActionBarView , BaseView{
     @Nullable
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    protected Activity mContext;
+
+    protected T mPresenter;
 
     private Unbinder unbinder;
 
@@ -47,10 +50,15 @@ public abstract class BaseActivity extends AppCompatActivity implements ActionBa
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         unbinder = ButterKnife.bind(this);
+        mContext = this;
+
         initializeToolbar();
         initViews();
         setInitialValues();
         setListeners();
+
+        if (mPresenter != null)
+            mPresenter.attachView(this);
     }
 
 
@@ -124,6 +132,8 @@ public abstract class BaseActivity extends AppCompatActivity implements ActionBa
     protected void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
+        if (mPresenter != null)
+            mPresenter.detachView();
     }
 
 }

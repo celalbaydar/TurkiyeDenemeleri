@@ -5,14 +5,20 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 
 import com.digits.sdk.android.AuthCallback;
 import com.digits.sdk.android.Digits;
 import com.digits.sdk.android.DigitsAuthButton;
 import com.digits.sdk.android.DigitsException;
 import com.digits.sdk.android.DigitsSession;
+import com.turkiyedenemeleri.app.MyApp;
 import com.turkiyedenemeleri.base.BaseActivity;
 import com.turkiyedenemeleri.customviews.TDTextView;
+import com.turkiyedenemeleri.model.MyHttpResponse;
+import com.turkiyedenemeleri.model.User;
+import com.turkiyedenemeleri.presenter.WelcomePresenter;
+import com.turkiyedenemeleri.presenter.contract.WelcomeContract;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterCore;
 
@@ -26,7 +32,7 @@ import permissions.dispatcher.PermissionRequest;
 import permissions.dispatcher.RuntimePermissions;
 
 @RuntimePermissions
-public class WelcomeActivity extends BaseActivity {
+public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements WelcomeContract.View {
     @BindView(R.id.TDtv_link) TDTextView link;
 
     @BindView(R.id.auth_button) DigitsAuthButton digitsButton;
@@ -50,6 +56,8 @@ public class WelcomeActivity extends BaseActivity {
 
         digitsButton.setBackgroundResource(R.drawable.btn_accept);
         digitsButton.setText(R.string.accaptandcontinue);
+
+        mPresenter=new WelcomePresenter();
     }
 
     @Override
@@ -59,7 +67,8 @@ public class WelcomeActivity extends BaseActivity {
             @Override
             public void success(DigitsSession session, String phoneNumber) {
                 //phone deleted +9
-                new RetrofitHelper().addUser(phoneNumber.substring(2),MyApp.loggedUserId);
+                //new RetrofitHelper().addUser(phoneNumber.substring(2), MyApp.loggedUserId);
+                mPresenter.addUser(phoneNumber.substring(2), MyApp.loggedUserId);
             }
             @Override
             public void failure(DigitsException exception) {
@@ -111,4 +120,14 @@ public class WelcomeActivity extends BaseActivity {
         digitsButton.performClick();
     }
 
+    @Override
+    public void showError(String msg) {
+
+    }
+
+    @Override
+    public void chekUserResponse(MyHttpResponse<User> user) {
+        Log.d("deneme", String.valueOf(user.getResponseType()));
+        Log.d("deneme",user.getData().getTelefon());
+    }
 }

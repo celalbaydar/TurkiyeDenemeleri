@@ -81,4 +81,9 @@ public class ProfilActivity extends BaseActivity {
         startActivityForResult(intent, CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE);
     }
 
+
+    @Override
+    public void showError(String msg) {
+
+    }
 }
