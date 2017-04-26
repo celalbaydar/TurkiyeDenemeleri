@@ -2,23 +2,26 @@ package com.turkiyedenemeleri;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 
 import com.digits.sdk.android.AuthCallback;
 import com.digits.sdk.android.Digits;
 import com.digits.sdk.android.DigitsAuthButton;
 import com.digits.sdk.android.DigitsException;
 import com.digits.sdk.android.DigitsSession;
+import com.google.gson.Gson;
 import com.turkiyedenemeleri.app.MyApp;
 import com.turkiyedenemeleri.base.BaseActivity;
 import com.turkiyedenemeleri.customviews.TDTextView;
 import com.turkiyedenemeleri.model.User;
 import com.turkiyedenemeleri.presenter.WelcomePresenter;
 import com.turkiyedenemeleri.presenter.contract.WelcomeContract;
+import com.turkiyedenemeleri.util.ActivityUtil;
 import com.turkiyedenemeleri.util.DialogUtil;
+import com.turkiyedenemeleri.util.SharedPreferenceUtil;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterCore;
 
@@ -46,7 +49,19 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Digits.Builder digitsBuilder = new Digits.Builder();
         Fabric.with(this, new TwitterCore(authConfig), digitsBuilder.build());
-        Digits.logout();
+        if (!Digits.isDigitsUser()) {
+            //startActivity(new Intent(this, WelcomeActivity.class));
+        } else if (!SharedPreferenceUtil.isUserFillProfil()) {
+            Gson gson=new Gson();
+            MyApp.loggedUser=gson.fromJson(SharedPreferenceUtil.getLoggedUser(),User.class);
+
+            int flags= Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK;
+            ActivityUtil.startActivity(this,ProfilActivity.class,flags);
+        } else {
+            int flags= Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK;
+            ActivityUtil.startActivity(this,MainActivity.class,flags);
+        }
+        //Digits.logout();
 
     }
 
@@ -68,7 +83,7 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
             public void success(DigitsSession session, String phoneNumber) {
                 //phone deleted +9
                 //new RetrofitHelper().addUser(phoneNumber.substring(2), MyApp.loggedUserId);
-                mPresenter.addUser(phoneNumber.substring(3), MyApp.loggedUserId);
+                mPresenter.addUser(phoneNumber.substring(2), MyApp.loggedUserId);
             }
             @Override
             public void failure(DigitsException exception) {
@@ -127,7 +142,15 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
 
     @Override
     public void chekUserResponse(User user) {
-        Log.d("deneme", String.valueOf(user.getTelefon()));
-        Log.d("deneme", String.valueOf(user.getIl()));
+        MyApp.loggedUser=user;
+
+        Gson gson=new Gson();
+        String userJson=gson.toJson(user);
+        SharedPreferenceUtil.setLoggedUser(userJson);
+
+        int flags= Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK;
+        ActivityUtil.startActivity(this,WelcomeActivity.class,flags);
     }
+
+
 }

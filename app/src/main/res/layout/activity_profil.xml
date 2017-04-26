@@ -48,7 +48,7 @@
                 app:civ_border_width="2dp" />
 
             <com.turkiyedenemeleri.customviews.TDEditText
-                android:id="@+id/TDEditText"
+                android:id="@+id/profil_adi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
