@@ -24,7 +24,7 @@ android {
     defaultConfig {
         applicationId "com.turkiyedenemeleri"
 
-        manifestPlaceholders = [onesignal_app_id: "998f3edb-b092-4272-a75c-9d1b5e7e668f",
+        manifestPlaceholders = [onesignal_app_id               : "998f3edb-b092-4272-a75c-9d1b5e7e668f",
                                 // Project number pulled from dashboard, local value is ignored.
                                 onesignal_google_project_number: "REMOTE"]
 
@@ -68,43 +68,38 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
     compile('com.digits.sdk.android:digits:2.0.5@aar') {
         transitive = true;
     }
+
     compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha9'
-    testCompile 'junit:junit:4.12'
     compile 'com.jakewharton:butterknife:8.5.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     compile 'com.github.hotchemi:permissionsdispatcher:2.3.2'
-    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:2.3.2'
     compile 'com.android.support:design:25.3.1'
     compile 'com.onesignal:OneSignal:3.+@aar'
     compile 'com.google.android.gms:play-services-gcm:9.8.0'
-    compile "com.google.android.gms:play-services-location:9.8.0"
-
+    compile 'com.google.android.gms:play-services-location:9.8.0'
     compile 'com.squareup.retrofit2:retrofit:2.2.0'
     compile 'com.squareup.retrofit2:converter-gson:2.2.0'
     compile 'com.squareup.okhttp3:okhttp:3.7.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.7.0'
-
-
     compile 'com.android.support:cardview-v7:25.3.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
-
-    compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0'
     compile 'de.hdodenhof:circleimageview:2.1.0'
-
     compile 'com.theartofdev.edmodo:android-image-cropper:2.4.2'
-
     compile 'io.reactivex.rxjava2:rxjava:2.0.9'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
-
     compile 'cn.pedant.sweetalert:library:1.3'
-    compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'id.zelory:compressor:1.0.4'
-
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.github.jd-alexander:LikeButton:0.2.0'
+    testCompile 'junit:junit:4.12'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:2.3.2'
 }

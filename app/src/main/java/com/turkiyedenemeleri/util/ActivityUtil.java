@@ -4,6 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+
+import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
 
 /**
  * Created by celal on 25/04/2017.
@@ -31,4 +37,15 @@ public class ActivityUtil {
         intent.putExtras(bundle);
         context.startActivity(intent);
     }
+
+
+    public static void addFragmentToActivity (@NonNull FragmentManager fragmentManager,
+                                              @NonNull Fragment fragment, int frameId) {
+        checkNotNull(fragmentManager);
+        checkNotNull(fragment);
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.add(frameId, fragment);
+        transaction.commit();
+    }
+
 }
