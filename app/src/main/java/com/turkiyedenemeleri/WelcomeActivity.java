@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 
 import com.digits.sdk.android.AuthCallback;
 import com.digits.sdk.android.Digits;
@@ -36,9 +37,11 @@ import permissions.dispatcher.RuntimePermissions;
 
 @RuntimePermissions
 public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements WelcomeContract.View {
-    @BindView(R.id.TDtv_link) TDTextView link;
+    @BindView(R.id.TDtv_link)
+    TDTextView link;
 
-    @BindView(R.id.auth_button) DigitsAuthButton digitsButton;
+    @BindView(R.id.auth_button)
+    DigitsAuthButton digitsButton;
     private static final String TWITTER_KEY = "nIhyru1O7xMYNo41wwja2Jxwo";
     private static final String TWITTER_SECRET = "1paz0cu4JKx4f7BObdJ0b8Wrj7gmz4CTziuXlOxpcafPKd1znG";
 
@@ -49,17 +52,18 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Digits.Builder digitsBuilder = new Digits.Builder();
         Fabric.with(this, new TwitterCore(authConfig), digitsBuilder.build());
-        if (!Digits.isDigitsUser()) {
+        if (!Digits.isDigitsUser() || SharedPreferenceUtil.getLoggedUser() == null) {
+            Digits.logout();
             //startActivity(new Intent(this, WelcomeActivity.class));
         } else if (!SharedPreferenceUtil.isUserFillProfil()) {
-            Gson gson=new Gson();
-            MyApp.loggedUser=gson.fromJson(SharedPreferenceUtil.getLoggedUser(),User.class);
-
-            int flags= Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK;
-            ActivityUtil.startActivity(this,ProfilActivity.class,flags);
+            Gson gson = new Gson();
+            MyApp.loggedUser = gson.fromJson(SharedPreferenceUtil.getLoggedUser(), User.class);
+            Log.e("TAG",SharedPreferenceUtil.getLoggedUser());
+            int flags = Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK;
+            ActivityUtil.startActivity(this, ProfilActivity.class, flags);
         } else {
-            int flags= Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK;
-            ActivityUtil.startActivity(this,MainActivity.class,flags);
+            int flags = Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK;
+            ActivityUtil.startActivity(this, MainActivity.class, flags);
         }
         //Digits.logout();
 
@@ -72,7 +76,7 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
         digitsButton.setBackgroundResource(R.drawable.btn_accept);
         digitsButton.setText(R.string.accaptandcontinue);
 
-        mPresenter=new WelcomePresenter();
+        mPresenter = new WelcomePresenter();
     }
 
     @Override
@@ -85,6 +89,7 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
                 //new RetrofitHelper().addUser(phoneNumber.substring(2), MyApp.loggedUserId);
                 mPresenter.addUser(phoneNumber.substring(2), MyApp.loggedUserId);
             }
+
             @Override
             public void failure(DigitsException exception) {
             }
@@ -92,6 +97,7 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
 
 
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -101,9 +107,10 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
     }
 
     @OnClick(R.id.regisbutton)
-    public void regisButtonClick(){
+    public void regisButtonClick() {
         WelcomeActivityPermissionsDispatcher.showSmsWithCheck(WelcomeActivity.this);
     }
+
     @Override
     protected void initViews() {
 
@@ -113,7 +120,6 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
     public int getLayoutId() {
         return R.layout.activity_welcome;
     }
-
 
 
     @NeedsPermission(Manifest.permission.RECEIVE_SMS)
@@ -131,25 +137,25 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
     }
 
     @OnPermissionDenied(Manifest.permission.RECEIVE_SMS)
-    void receiveSmsDenied(){
+    void receiveSmsDenied() {
         digitsButton.performClick();
     }
 
     @Override
-    public void showError(int errorCode,String msg) {
-        DialogUtil.addErrorDialog(this,"Oppppsss",msg).show();
+    public void showError(int errorCode, String msg) {
+        DialogUtil.addErrorDialog(this, "Oppppsss", msg).show();
     }
 
     @Override
     public void chekUserResponse(User user) {
-        MyApp.loggedUser=user;
+        MyApp.loggedUser = user;
 
-        Gson gson=new Gson();
-        String userJson=gson.toJson(user);
+        Gson gson = new Gson();
+        String userJson = gson.toJson(user);
         SharedPreferenceUtil.setLoggedUser(userJson);
 
-        int flags= Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK;
-        ActivityUtil.startActivity(this,WelcomeActivity.class,flags);
+        int flags = Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK;
+        ActivityUtil.startActivity(this, ProfilActivity.class, flags);
     }
 
 

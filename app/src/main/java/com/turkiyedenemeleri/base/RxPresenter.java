@@ -16,7 +16,7 @@ public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
         }
     }
 
-    protected void addSubscrebe(Disposable subscription) {
+    protected void addSubscribe(Disposable subscription) {
         if (mCompositeDisposable == null) {
             mCompositeDisposable = new CompositeDisposable();
         }

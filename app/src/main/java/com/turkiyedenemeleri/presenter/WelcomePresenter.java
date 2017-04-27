@@ -49,7 +49,7 @@ public class WelcomePresenter extends RxPresenter<WelcomeContract.View> implemen
                     }
                 });
 
-        addSubscrebe(rxSubscription);
+        addSubscribe(rxSubscription);
     }
 
 }

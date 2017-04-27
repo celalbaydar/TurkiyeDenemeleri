@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -16,13 +17,24 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.turkiyedenemeleri.app.MyApp;
 import com.turkiyedenemeleri.base.BaseActivity;
 import com.turkiyedenemeleri.customviews.TDEditText;
+import com.turkiyedenemeleri.presenter.ProfilPresenter;
+import com.turkiyedenemeleri.presenter.contract.ProfileContract;
+import com.turkiyedenemeleri.util.FileUtil;
 import com.turkiyedenemeleri.util.PicassoUtil;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
+import id.zelory.compressor.Compressor;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
-public class ProfilActivity extends BaseActivity {
+public class ProfilActivity extends BaseActivity<ProfilPresenter> implements ProfileContract.View {
 
     private Uri mCropImageUri;
     @BindView(R.id.profile_image)
@@ -42,18 +54,20 @@ public class ProfilActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
     @Override
     protected void setInitialValues() {
+        mPresenter = new ProfilPresenter();
         profilAdi.setText(MyApp.loggedUser.getKullaniciadi());
 
-        if (MyApp.loggedUser.getCinsiyet()==1){
+        if (MyApp.loggedUser.getCinsiyet() == 1) {
             cinsiyet.check(R.id.rb_kadın);
-        }else if(MyApp.loggedUser.getCinsiyet()==2){
+        } else if (MyApp.loggedUser.getCinsiyet() == 2) {
             cinsiyet.check(R.id.rb_erkek);
         }
-        il.setSelection(MyApp.loggedUser.getIl(),true);
+        il.setSelection(MyApp.loggedUser.getIl(), true);
 
-        new PicassoUtil(this).loadImageWithCache(MyApp.loggedUser.getResim_url(),profilePhoto);
+        new PicassoUtil(this).loadImageWithCache(MyApp.loggedUser.getResim_url(), profilePhoto);
     }
 
     @Override
@@ -71,6 +85,54 @@ public class ProfilActivity extends BaseActivity {
     public void onSelectImageClick(View view) {
         CropImage.startPickImageActivity(this);
     }
+
+    @OnClick(R.id.btnRegister)
+    public void onClick(View view) {
+        String strIl = String.valueOf(il.getSelectedItemPosition());
+        String token = MyApp.loggedUserId;
+        String strCinsiyet = (cinsiyet.getCheckedRadioButtonId() == R.id.rb_erkek) ? "2" : "1";
+        String kullaniciAdi = profilAdi.getText().toString();
+        FileUtil fileUtil = new FileUtil();
+
+
+
+        if (mCropImageUri != null) {
+            java.net.URI juri = fileUtil.getUriFromAndroidUri(mCropImageUri.toString());
+            String path = fileUtil.getRealPathFromUri(this, mCropImageUri);
+            File file = new File(path);
+            Log.e("TAG1",""+Integer.parseInt(String.valueOf(file.length()/1024)));
+
+
+            File compressedImageFile = Compressor.getDefault(this).compressToFile(file);
+            Log.e("TAG2",""+Integer.parseInt(String.valueOf(compressedImageFile.length()/1024)));
+
+
+            RequestBody requestFile =
+                    RequestBody.create(
+                            MediaType.parse("multipart/form-data"), compressedImageFile);
+            MultipartBody.Part body =
+                    MultipartBody.Part.createFormData("file", compressedImageFile.getName(), requestFile);
+
+            Map<String, String> map = new HashMap<>();
+            map.put("il", strIl);
+            map.put("token", token);
+            map.put("cinsiyet", strCinsiyet);
+            map.put("kullaniciadi", kullaniciAdi);
+            mPresenter.updateImage(map, body);
+
+
+
+
+
+            } else mPresenter.updateImage(strIl, token, strCinsiyet, kullaniciAdi);
+
+        Toast.makeText(mContext, "Profiliniz bir kaç saniye içinde güncellenmiş olacak.", Toast.LENGTH_SHORT).show();
+
+    }
+
+
+
+
     @Override
     @SuppressLint("NewApi")
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -78,20 +140,22 @@ public class ProfilActivity extends BaseActivity {
             Uri imageUri = CropImage.getPickImageResultUri(this, data);
             if (CropImage.isReadExternalStoragePermissionsRequired(this, imageUri)) {
                 mCropImageUri = imageUri;
-                requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},   CropImage.PICK_IMAGE_PERMISSIONS_REQUEST_CODE);
+                requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, CropImage.PICK_IMAGE_PERMISSIONS_REQUEST_CODE);
             } else {
                 startCropImageActivity(imageUri);
             }
-        }else  if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+        } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 Uri resultUri = result.getUri();
+                mCropImageUri = resultUri;
                 profilePhoto.setImageURI(resultUri);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
         }
     }
+
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         if (requestCode == CropImage.PICK_IMAGE_PERMISSIONS_REQUEST_CODE) {
             if (mCropImageUri != null && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -101,6 +165,7 @@ public class ProfilActivity extends BaseActivity {
             }
         }
     }
+
     private void startCropImageActivity(Uri imageUri) {
         Intent intent = CropImage.activity(imageUri)
                 .getIntent(this);
@@ -109,8 +174,12 @@ public class ProfilActivity extends BaseActivity {
 
 
     @Override
-    public void showError(int errorCode,String msg) {
+    public void showError(int errorCode, String msg) {
 
     }
 
+    @Override
+    public void profileUpdated() {
+        Toast.makeText(mContext, "Profil güncellendi", Toast.LENGTH_SHORT).show();
+    }
 }
