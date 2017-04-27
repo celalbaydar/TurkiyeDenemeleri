@@ -1,160 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    app:background="@drawable/item_remaining_time_background"
-    xmlns:app="http://schemas.android.com/apk/res/android"
-    app:id="@+id/activity_main"
-    app:layout_width="match_parent"
-    app:layout_height="wrap_content"
-    app:paddingBottom="5dp"
-    app:paddingLeft="5dp"
-    app:paddingRight="5dp"
-    app:paddingTop="5dp">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="5dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingTop="5dp">
 
     <LinearLayout
-        app:layout_width="match_parent"
-        app:layout_height="wrap_content"
-        app:background="@drawable/item_remaining_time_border"
-        app:orientation="horizontal"
-        app:padding="15dp"
-        app:layout_alignParentTop="true"
-        app:layout_alignParentLeft="true"
-        app:layout_alignParentStart="true">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/item_remaining_time_border"
+        android:orientation="horizontal"
+        android:padding="15dp">
 
         <LinearLayout
-            app:layout_width="wrap_content"
-            app:layout_height="wrap_content"
-            app:layout_marginRight="10dp"
-            app:layout_weight="0.0"
-            app:orientation="vertical">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="0.0"
+            android:orientation="vertical">
 
             <LinearLayout
-                app:layout_width="match_parent"
-                app:layout_height="match_parent"
-                app:layout_weight="2.0"
-                app:background="@drawable/ic_calander"
-                app:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2.0"
+                android:background="@drawable/ic_calander"
+                android:orientation="vertical">
 
                 <TextView
-                    app:id="@+id/tv_gun_icon"
-                    app:layout_width="match_parent"
-                    app:layout_height="match_parent"
-                    app:gravity="center"
-                    app:text="999"
-                    app:textColor="#ffffff"
-                    app:textSize="36sp"
-                    app:textStyle="bold" />
+                    android:id="@+id/tv_gun_icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="999"
+                    android:textColor="#ffffff"
+                    android:textSize="36sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <TextView
-                app:id="@+id/tv_kalan_gun"
-                app:layout_width="match_parent"
-                app:layout_height="wrap_content"
-                app:layout_weight="2.0"
-                app:text="Kalan Gün"
-                app:textColor="#ffffff"
-                app:gravity="center"
-                app:textSize="15sp"
-                app:textStyle="bold" />
+                android:id="@+id/tv_kalan_gun"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.0"
+                android:gravity="center"
+                android:text="Kalan Gün"
+                android:textColor="#ffffff"
+                android:textSize="15sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
-            app:layout_width="wrap_content"
-            app:layout_height="wrap_content"
-            app:layout_marginLeft="10dp"
-            app:layout_weight="1.0"
-            app:orientation="vertical">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1.0"
+            android:orientation="vertical">
 
             <LinearLayout
-                app:layout_width="wrap_content"
-                app:layout_height="wrap_content"
-                app:layout_marginBottom="5dp"
-                app:orientation="horizontal">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
 
                 <TextView
-                    app:id="@+id/tv_ad"
-                    app:layout_width="wrap_content"
-                    app:layout_height="wrap_content"
-                    app:layout_weight="5.0"
-                    app:text="ad"
-                    app:textColor="#ffffff"
-                    app:textStyle="bold" />
+                    android:id="@+id/tv_ad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5.0"
+                    android:text="ad"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
-                app:layout_width="wrap_content"
-                app:layout_height="wrap_content"
-                app:layout_marginBottom="5dp"
-                app:gravity="top|bottom|center_vertical|fill_vertical|center|fill"
-                app:orientation="horizontal">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="top|bottom|center_vertical|fill_vertical|center|fill"
+                android:orientation="horizontal">
 
                 <ImageView
-                    app:layout_width="wrap_content"
-                    app:layout_height="wrap_content"
-                    app:layout_marginRight="5dp"
-                    app:background="@drawable/ic_calender_white" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/ic_calender_white" />
 
                 <TextView
-                    app:id="@+id/tv_tarih"
-                    app:layout_width="wrap_content"
-                    app:layout_height="wrap_content"
-                    app:layout_marginRight="10dp"
-                    app:text="tarih"
-                    app:textColor="#ffffff"
-                    app:textSize="18sp"
-                    app:textStyle="bold" />
+                    android:id="@+id/tv_tarih"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="tarih"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
-                app:layout_width="wrap_content"
-                app:layout_height="wrap_content"
-                app:orientation="horizontal">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <ImageView
-                    app:layout_width="wrap_content"
-                    app:layout_height="wrap_content"
-                    app:layout_marginRight="5dp"
-                    app:background="@drawable/ic_calender_white" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/ic_calender_white" />
 
                 <TextView
-                    app:id="@+id/tv_gun"
-                    app:layout_width="match_parent"
-                    app:layout_height="wrap_content"
-                    app:layout_weight="1.0"
-                    app:text="Cumartesi"
-                    app:textColor="#ffffff"
-                    app:textSize="15sp"
-                    app:textStyle="bold" />
+                    android:id="@+id/tv_gun"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:text="Cumartesi"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
-                app:layout_marginTop="2dp"
-                app:layout_width="wrap_content"
-                app:layout_height="wrap_content"
-                app:gravity="top|bottom|center_vertical|fill_vertical|center|fill"
-                app:orientation="horizontal">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:gravity="top|bottom|center_vertical|fill_vertical|center|fill"
+                android:orientation="horizontal">
 
                 <ImageView
-                    app:layout_width="34dp"
-                    app:layout_height="36dp"
-                    app:layout_marginRight="5dp"
-                    app:background="@drawable/ic_clock_time" />
+                    android:layout_width="34dp"
+                    android:layout_height="36dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/ic_clock_time" />
 
                 <TextView
-                    app:id="@+id/tv_saat"
-                    app:layout_width="wrap_content"
-                    app:layout_height="wrap_content"
-                    app:text="saat"
-                    app:textColor="#ffffff"
-                    app:textSize="18sp"
-                    app:textStyle="bold" />
+                    android:id="@+id/tv_saat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="saat"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
 
         <ToggleButton
-            app:id="@+id/toggleButton"
-            app:layout_width="47dp"
-            app:layout_height="wrap_content"
-             app:textOff=""
-            app:textOn="" />
+            android:id="@+id/toggleButton"
+            android:layout_width="47dp"
+            android:layout_height="wrap_content"
+            android:textOff=""
+            android:textOn="" />
     </LinearLayout>
 </RelativeLayout>

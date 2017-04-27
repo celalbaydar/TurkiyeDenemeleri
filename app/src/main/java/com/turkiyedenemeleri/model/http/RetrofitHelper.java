@@ -5,11 +5,13 @@ import com.google.gson.GsonBuilder;
 import com.turkiyedenemeleri.app.Constants;
 import com.turkiyedenemeleri.model.MyHttpResponse;
 import com.turkiyedenemeleri.model.User;
+import com.turkiyedenemeleri.model.http.api.SınavService;
 import com.turkiyedenemeleri.model.http.api.UyeService;
 import com.turkiyedenemeleri.util.SystemUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -36,10 +38,12 @@ public class RetrofitHelper {
 
     private static OkHttpClient okHttpClient = null;
     private static UyeService uyeService = null;
+    private static SınavService sınavService = null;
 
     private void init() {
         initOkHttp();
         uyeService = getApiService(UyeService.class);
+        sınavService = getApiService(SınavService.class);
 
     }
 
@@ -129,7 +133,9 @@ public class RetrofitHelper {
     public Observable<MyHttpResponse<User>> updateProfile(Map<String, String> options, MultipartBody.Part file) {
         return uyeService.updateProfile(options,file);
     }
-
+    public  Observable<MyHttpResponse<ArrayList<Sınav>>> getSınav(String token) {
+        return sınavService.getSınav(token);
+    }
 
 
 

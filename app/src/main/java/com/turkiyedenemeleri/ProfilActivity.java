@@ -2,6 +2,7 @@ package com.turkiyedenemeleri;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -19,8 +20,11 @@ import com.turkiyedenemeleri.base.BaseActivity;
 import com.turkiyedenemeleri.customviews.TDEditText;
 import com.turkiyedenemeleri.presenter.ProfilPresenter;
 import com.turkiyedenemeleri.presenter.contract.ProfileContract;
+import com.turkiyedenemeleri.util.ActivityUtil;
 import com.turkiyedenemeleri.util.FileUtil;
 import com.turkiyedenemeleri.util.PicassoUtil;
+import com.turkiyedenemeleri.util.ProgressDialogUtil;
+import com.turkiyedenemeleri.util.SharedPreferenceUtil;
 
 import java.io.File;
 import java.util.HashMap;
@@ -49,6 +53,7 @@ public class ProfilActivity extends BaseActivity<ProfilPresenter> implements Pro
     RadioButton kadın;
     @BindView(R.id.spinner)
     Spinner il;
+    ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,7 +131,7 @@ public class ProfilActivity extends BaseActivity<ProfilPresenter> implements Pro
 
             } else mPresenter.updateImage(strIl, token, strCinsiyet, kullaniciAdi);
 
-        Toast.makeText(mContext, "Profiliniz bir kaç saniye içinde güncellenmiş olacak.", Toast.LENGTH_SHORT).show();
+        dialog= new ProgressDialogUtil(mContext).create("Kaydediliyor");
 
     }
 
@@ -180,6 +185,10 @@ public class ProfilActivity extends BaseActivity<ProfilPresenter> implements Pro
 
     @Override
     public void profileUpdated() {
+        if (dialog!=null) dialog.dismiss();
+        SharedPreferenceUtil.setUserFillProfil(true);
         Toast.makeText(mContext, "Profil güncellendi", Toast.LENGTH_SHORT).show();
+        int flags = Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK;
+        ActivityUtil.startActivity(mContext, MainActivity.class, flags);
     }
 }

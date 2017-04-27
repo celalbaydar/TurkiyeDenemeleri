@@ -2,6 +2,7 @@ package com.turkiyedenemeleri;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,6 +23,7 @@ import com.turkiyedenemeleri.presenter.WelcomePresenter;
 import com.turkiyedenemeleri.presenter.contract.WelcomeContract;
 import com.turkiyedenemeleri.util.ActivityUtil;
 import com.turkiyedenemeleri.util.DialogUtil;
+import com.turkiyedenemeleri.util.ProgressDialogUtil;
 import com.turkiyedenemeleri.util.SharedPreferenceUtil;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterCore;
@@ -44,7 +46,7 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
     DigitsAuthButton digitsButton;
     private static final String TWITTER_KEY = "nIhyru1O7xMYNo41wwja2Jxwo";
     private static final String TWITTER_SECRET = "1paz0cu4JKx4f7BObdJ0b8Wrj7gmz4CTziuXlOxpcafPKd1znG";
-
+    ProgressDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,10 +62,10 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
             MyApp.loggedUser = gson.fromJson(SharedPreferenceUtil.getLoggedUser(), User.class);
             Log.e("TAG",SharedPreferenceUtil.getLoggedUser());
             int flags = Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK;
-            ActivityUtil.startActivity(this, ProfilActivity.class, flags);
+            ActivityUtil.startActivity(mContext, ProfilActivity.class, flags);
         } else {
-            int flags = Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK;
-            ActivityUtil.startActivity(this, MainActivity.class, flags);
+            int flags = Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION;
+            ActivityUtil.startActivity(mContext, MainActivity.class, flags);
         }
         //Digits.logout();
 
@@ -86,8 +88,8 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
             @Override
             public void success(DigitsSession session, String phoneNumber) {
                 //phone deleted +9
-                //new RetrofitHelper().addUser(phoneNumber.substring(2), MyApp.loggedUserId);
                 mPresenter.addUser(phoneNumber.substring(2), MyApp.loggedUserId);
+                dialog= new ProgressDialogUtil(mContext).create("Verileriniz Sunucuyla Eşleniyor");
             }
 
             @Override
@@ -153,9 +155,9 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
         Gson gson = new Gson();
         String userJson = gson.toJson(user);
         SharedPreferenceUtil.setLoggedUser(userJson);
-
+        if (dialog!=null) dialog.dismiss();
         int flags = Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK;
-        ActivityUtil.startActivity(this, ProfilActivity.class, flags);
+        ActivityUtil.startActivity(mContext, ProfilActivity.class, flags);
     }
 
 

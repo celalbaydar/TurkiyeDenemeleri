@@ -33,7 +33,6 @@ public class PicassoUtil {
                     public void onSuccess() {
 
                     }
-
                     @Override
                     public void onError() {
                         Picasso.with(context)

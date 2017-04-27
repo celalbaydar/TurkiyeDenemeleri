@@ -42,15 +42,21 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+        }
     }
-
+    dexOptions {
+        javaMaxHeapSize '8g'
+    }
     compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8
         incremental false
 
     }
-
+    configurations.all {
+        resolutionStrategy.cacheDynamicVersionsFor 400, 'minutes'
+    }
     packagingOptions {
         exclude 'META-INF/rxjava.properties'
     }
