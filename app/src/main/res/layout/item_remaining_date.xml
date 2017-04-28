@@ -1,158 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_main"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingBottom="5dp"
-    android:paddingLeft="5dp"
-    android:paddingRight="5dp"
-    android:paddingTop="5dp">
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
 
-    <LinearLayout
+    <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/item_remaining_time_border"
-        android:orientation="horizontal"
-        android:padding="15dp">
+        app:cardCornerRadius="2dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="0.0"
-            android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2.0"
-                android:background="@drawable/ic_calander"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_marginRight="70dp"
+                android:background="@drawable/item_remaining_time_border"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="5dp">
 
-                <TextView
-                    android:id="@+id/tv_gun_icon"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:background="@drawable/ic_calander">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <com.turkiyedenemeleri.customviews.TDTextView
+                            android:id="@+id/tv_gun"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.6"
+                            android:gravity="center"
+                            android:text="17"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_xxhuge"
+                            app:tvFontName="Bold.otf" />
+
+                        <com.turkiyedenemeleri.customviews.TDTextView
+                            android:id="@+id/tv_ay"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.4"
+                            android:gravity="center"
+                            android:text="HAZİRAN"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_xlarge"
+                            app:tvFontName="Bold.otf" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="999"
-                    android:textColor="#ffffff"
-                    android:textSize="36sp"
-                    android:textStyle="bold" />
+                    android:layout_weight="0.3">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="15dp"
+                        android:orientation="vertical">
+
+                        <com.turkiyedenemeleri.customviews.TDTextView
+                            android:id="@+id/tv_sınav_adi"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.2"
+                            android:gravity="center_vertical"
+                            android:text="Ygs Denemesi 3"
+                            android:textSize="@dimen/font_xlarge"
+                            app:tvFontName="Regular.otf" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.2"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.5"
+                                android:orientation="vertical">
+
+                                <com.turkiyedenemeleri.customviews.TDTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="0.2"
+                                    android:gravity="center_vertical"
+                                    android:text="Başlama"
+                                    android:textSize="@dimen/font_et_large"
+                                    app:tvFontName="Regular.otf" />
+
+                                <com.turkiyedenemeleri.customviews.TDTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="0.2"
+                                    android:gravity="center_vertical"
+                                    android:text="Bitiş"
+                                    android:textSize="@dimen/font_et_large"
+                                    app:tvFontName="Regular.otf" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.5"
+                                android:orientation="vertical">
+
+                                <com.turkiyedenemeleri.customviews.TDTextView
+                                    android:id="@+id/tv_bas_saat"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="0.2"
+                                    android:gravity="center_vertical"
+                                    android:text=": 10:00"
+                                    android:textSize="@dimen/font_xlarge"
+                                    app:tvFontName="Regular.otf" />
+
+                                <com.turkiyedenemeleri.customviews.TDTextView
+                                    android:id="@+id/tv_bit_saat"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="0.2"
+                                    android:gravity="center_vertical"
+                                    android:text=": 20:00"
+                                    android:textSize="@dimen/font_xlarge"
+                                    app:tvFontName="Regular.otf" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <com.turkiyedenemeleri.customviews.TDTextView
+                            android:id="@+id/tv_kisi"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.2"
+                            android:gravity="center_vertical"
+                            android:text="10 kişi kaydoldu"
+                            android:textSize="@dimen/font_xlarge"
+                            app:tvFontName="Regular.otf" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_kalan_gun"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2.0"
-                android:gravity="center"
-                android:text="Kalan Gün"
-                android:textColor="#ffffff"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1.0"
-            android:orientation="vertical">
-
-            <LinearLayout
+            <com.turkiyedenemeleri.customviews.star.LikeButtonView
+                android:id="@+id/like"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:orientation="horizontal">
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical|end"
+                tools:ignore="RelativeOverlap" />
+        </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/tv_ad"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="5.0"
-                    android:text="ad"
-                    android:textColor="#ffffff"
-                    android:textStyle="bold" />
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:gravity="top|bottom|center_vertical|fill_vertical|center|fill"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:background="@drawable/ic_calender_white" />
-
-                <TextView
-                    android:id="@+id/tv_tarih"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:text="tarih"
-                    android:textColor="#ffffff"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:background="@drawable/ic_calender_white" />
-
-                <TextView
-                    android:id="@+id/tv_gun"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.0"
-                    android:text="Cumartesi"
-                    android:textColor="#ffffff"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:gravity="top|bottom|center_vertical|fill_vertical|center|fill"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="34dp"
-                    android:layout_height="36dp"
-                    android:layout_marginRight="5dp"
-                    android:background="@drawable/ic_clock_time" />
-
-                <TextView
-                    android:id="@+id/tv_saat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="saat"
-                    android:textColor="#ffffff"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <ToggleButton
-            android:id="@+id/toggleButton"
-            android:layout_width="47dp"
-            android:layout_height="wrap_content"
-            android:textOff=""
-            android:textOn="" />
-    </LinearLayout>
-</RelativeLayout>
+    </android.support.v7.widget.CardView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+</LinearLayout>

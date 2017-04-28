@@ -2,13 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.turkiyedenemeleri.fragments.MainFragment">
+    tools:context="com.turkiyedenemeleri.fragments.SonucFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <android.support.v7.widget.RecyclerView
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rcView"
-         />
+        android:text="@string/hello_blank_fragment" />
 
 </FrameLayout>

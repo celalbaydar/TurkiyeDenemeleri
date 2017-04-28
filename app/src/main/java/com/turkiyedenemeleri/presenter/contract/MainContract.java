@@ -2,7 +2,8 @@ package com.turkiyedenemeleri.presenter.contract;
 
 import com.turkiyedenemeleri.base.BasePresenter;
 import com.turkiyedenemeleri.base.BaseView;
-import com.turkiyedenemeleri.model.http.Sınav;
+import com.turkiyedenemeleri.model.MyHttpResponseNoBody;
+import com.turkiyedenemeleri.model.Sınav;
 
 import java.util.ArrayList;
 
@@ -13,9 +14,13 @@ import java.util.ArrayList;
 public interface MainContract {
     interface View extends BaseView {
         void sınavCompleted(ArrayList<Sınav> sınavlar);
+        void sınavKayıt(MyHttpResponseNoBody response);
+
     }
 
     interface Presenter extends BasePresenter<View> {
         void getSınav(String token);
+        void addSınav(String token,String sınavid);
+
     }
 }

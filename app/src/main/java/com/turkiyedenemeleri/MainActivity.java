@@ -12,10 +12,12 @@ import android.view.MenuItem;
 
 import com.turkiyedenemeleri.base.BaseActivity;
 import com.turkiyedenemeleri.fragments.MainFragment;
+import com.turkiyedenemeleri.fragments.SonucFragment;
 import com.turkiyedenemeleri.presenter.MainPresenter;
 import com.turkiyedenemeleri.util.ActivityUtil;
 
 import butterknife.BindView;
+
 
 public class MainActivity extends BaseActivity<MainPresenter> implements
         NavigationView.OnNavigationItemSelectedListener {
@@ -24,6 +26,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements
     NavigationView navigationView;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    MainFragment mainFragment;
+    SonucFragment sonucFragment;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,15 +38,15 @@ public class MainActivity extends BaseActivity<MainPresenter> implements
     @Override
     protected void setInitialValues() {
 
-
         ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.ic_menu);
         ab.setDisplayHomeAsUpEnabled(true);
 
 
+
         MainFragment newsFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
         if (newsFragment == null) {
-            newsFragment = MainFragment.newInstance("","");
+            newsFragment = MainFragment.newInstance();
             ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), newsFragment, R.id.contentFrame);
             navigationView.getMenu().getItem(0).setChecked(true);
         }
@@ -49,7 +54,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements
 
     @Override
     protected void initViews() {
-     //   Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //   Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Sinavlarim");
         setSupportActionBar(toolbar);
 
@@ -59,9 +64,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-
-      //  navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
 
     }
 
@@ -76,9 +81,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements
     }
 
 
-
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -89,16 +94,23 @@ public class MainActivity extends BaseActivity<MainPresenter> implements
 
 
 
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
 
+        int id = item.getItemId();
         if (id == R.id.nav_exams) {
-            // Handle the camera action
+
+                 mainFragment=MainFragment.newInstance();
+                ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), mainFragment, R.id.contentFrame);
+                navigationView.getMenu().getItem(0).setChecked(true);
+
         } else if (id == R.id.nav_results) {
+
+                sonucFragment=SonucFragment.newInstance();
+                ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), sonucFragment, R.id.contentFrame);
+                navigationView.getMenu().getItem(0).setChecked(true);
 
         } else if (id == R.id.nav_about) {
 
@@ -108,4 +120,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+
+
 }

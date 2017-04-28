@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.turkiyedenemeleri.app.Constants;
 import com.turkiyedenemeleri.model.MyHttpResponse;
+import com.turkiyedenemeleri.model.MyHttpResponseNoBody;
+import com.turkiyedenemeleri.model.Sınav;
 import com.turkiyedenemeleri.model.User;
 import com.turkiyedenemeleri.model.http.api.SınavService;
 import com.turkiyedenemeleri.model.http.api.UyeService;
@@ -129,9 +131,12 @@ public class RetrofitHelper {
         return uyeService.updateProfile(il, token, cinsiyet, kullaniciAdi);
     }
 
-
     public Observable<MyHttpResponse<User>> updateProfile(Map<String, String> options, MultipartBody.Part file) {
         return uyeService.updateProfile(options,file);
+    }
+
+    public Observable<MyHttpResponseNoBody> addSınav(String token, String sınavid) {
+        return sınavService.sınavKayıt(token, sınavid);
     }
     public  Observable<MyHttpResponse<ArrayList<Sınav>>> getSınav(String token) {
         return sınavService.getSınav(token);

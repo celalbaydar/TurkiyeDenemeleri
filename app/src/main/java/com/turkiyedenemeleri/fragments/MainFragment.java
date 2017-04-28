@@ -1,66 +1,75 @@
 package com.turkiyedenemeleri.fragments;
 
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
+
+import com.turkiyedenemeleri.R;
+import com.turkiyedenemeleri.adapter.Sınavlar;
+import com.turkiyedenemeleri.app.MyApp;
+import com.turkiyedenemeleri.base.BaseFragment;
+import com.turkiyedenemeleri.model.MyHttpResponseNoBody;
+import com.turkiyedenemeleri.model.Sınav;
+import com.turkiyedenemeleri.presenter.MainPresenter;
+import com.turkiyedenemeleri.presenter.contract.MainContract;
+
+import java.util.ArrayList;
+
+import butterknife.BindView;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link MainFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MainFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class MainFragment extends BaseFragment<MainPresenter> implements MainContract.View {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    @BindView(R.id.rcView)
+    RecyclerView rcView;
 
     public MainFragment() {
-        // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MainFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MainFragment newInstance(String param1, String param2) {
-        MainFragment fragment = new MainFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    public static MainFragment newInstance() {
+        return new MainFragment();
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    protected void initInject() {
+        mPresenter = new MainPresenter();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        TextView textView = new TextView(getActivity());
-        textView.setText("ŞAFO");
-        return textView;
+    protected int getLayoutId() {
+        return R.layout.fragment_main;
     }
 
+
+    @Override
+    protected void initEventAndData() {
+        LinearLayoutManager llm = new LinearLayoutManager(mContext);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        rcView.setLayoutManager(llm);
+        mPresenter.getSınav(MyApp.loggedUserId);
+    }
+
+    @Override
+    public void showError(int errorCode, String msg) {
+
+    }
+
+    @Override
+    public void sınavCompleted(ArrayList<Sınav> sınavlar) {
+        Sınavlar sınav = new Sınavlar(sınavlar,mPresenter);
+        rcView.setAdapter(sınav);
+    }
+
+    @Override
+    public void sınavKayıt(MyHttpResponseNoBody response) {
+        if (response.getResponseType() == 200)
+            Toast.makeText(mActivity, "Başarılı", Toast.LENGTH_SHORT).show();
+        else Toast.makeText(mActivity, "Sıkıntılı", Toast.LENGTH_SHORT).show();
+    }
 }

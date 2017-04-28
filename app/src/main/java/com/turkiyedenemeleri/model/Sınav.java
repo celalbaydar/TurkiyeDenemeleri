@@ -16,6 +16,14 @@ public class Sınav {
     String kayıtlıkullanıcı;
     String kalansure;
     String sınavbitis;
+    String id;
+
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getKalansure() {
         return kalansure;

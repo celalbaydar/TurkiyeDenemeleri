@@ -37,4 +37,14 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
                 });
         addSubscribe(rxSubscription);
     }
+
+    @Override
+    public void addSınav(String token, String sınavid) {
+        Disposable rxSubscription = mRetrofitHelper.addSınav(token,sınavid)
+                .compose(RxUtil.rxSchedulerHelper())
+                .subscribe(sınav -> {
+                    mView.sınavKayıt(sınav);
+                });
+        addSubscribe(rxSubscription);
+    }
 }

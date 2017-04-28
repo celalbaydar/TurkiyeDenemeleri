@@ -9,6 +9,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
+import com.turkiyedenemeleri.R;
+
 import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
 
 /**
@@ -44,7 +46,8 @@ public class ActivityUtil {
         checkNotNull(fragmentManager);
         checkNotNull(fragment);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.add(frameId, fragment);
+        transaction.setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left);
+        transaction.replace(frameId, fragment);
         transaction.commit();
     }
 
