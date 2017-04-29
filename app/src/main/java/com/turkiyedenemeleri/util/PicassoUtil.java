@@ -14,14 +14,14 @@ import com.turkiyedenemeleri.R;
  */
 
 public class PicassoUtil {
-    private final String BASE_URL="http://45.55.219.42/TurkiyeDenemeleri/userphotos/";
+    private final String BASE_URL="http://45.55.219.42/TurkiyeDenemeleri/";
     Context context;
 
     public PicassoUtil(Context context) {
         this.context = context;
     }
 
-    public void loadImageWithCache(String imageUrl, ImageView imageView){
+    public void loadImageWithCache(final String imageUrl,final ImageView imageView){
         Log.d("deneme",BASE_URL+imageUrl);
         Picasso.with(context)
                 .load(BASE_URL+imageUrl)

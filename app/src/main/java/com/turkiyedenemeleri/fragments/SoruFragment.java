@@ -5,18 +5,19 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.turkiyedenemeleri.R;
 import com.turkiyedenemeleri.base.BaseFragment;
-import com.turkiyedenemeleri.customviews.TDTextView;
 import com.turkiyedenemeleri.presenter.MainPresenter;
+import com.turkiyedenemeleri.util.PicassoUtil;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SoruFragment extends BaseFragment<MainPresenter> {
 
-    private TDTextView textView;
+    private ImageView imageView;
 
     public SoruFragment() {
         // Required empty public constructor
@@ -54,10 +55,9 @@ public class SoruFragment extends BaseFragment<MainPresenter> {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        textView = (TDTextView) view.findViewById(R.id.qNoAsText);
-        textView.setText(""+getArguments().getInt("no"));
-
+        int number=getArguments().getInt("no")+1;
+        imageView = (ImageView) view.findViewById(R.id.soru);
+        new PicassoUtil(getContext()).loadImageWithCache("soru/1/matematik/"+number,imageView);
     }
 
     @Override

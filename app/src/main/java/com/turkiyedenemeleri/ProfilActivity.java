@@ -72,7 +72,7 @@ public class ProfilActivity extends BaseActivity<ProfilPresenter> implements Pro
         }
         il.setSelection(MyApp.loggedUser.getIl(), true);
 
-        new PicassoUtil(this).loadImageWithCache(MyApp.loggedUser.getResim_url(), profilePhoto);
+        new PicassoUtil(this).loadImageWithCache("userphotos/"+MyApp.loggedUser.getResim_url(), profilePhoto);
     }
 
     @Override

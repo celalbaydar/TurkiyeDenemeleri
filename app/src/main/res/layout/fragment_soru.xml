@@ -1,20 +1,17 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.turkiyedenemeleri.fragments.SoruFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <com.turkiyedenemeleri.customviews.TDTextView
+    <ImageView
+        android:id="@+id/soru"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/font_xxhuge"
-        app:tvFontName="Bold.otf"
-        android:gravity="center"
-        android:id="@+id/qNoAsText"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:text="MERHABA"/>
+      />
 
 
 </FrameLayout>

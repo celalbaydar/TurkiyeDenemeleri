@@ -42,12 +42,22 @@ public class ActivityUtil {
 
 
     public static void addFragmentToActivity (@NonNull FragmentManager fragmentManager,
-                                              @NonNull Fragment fragment, int frameId) {
+                                               @NonNull Fragment fragment, int frameId) {
         checkNotNull(fragmentManager);
         checkNotNull(fragment);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left);
+        transaction.add(frameId, fragment);
+        transaction.commit();
+    }
+    public static void addToBackStackFragmentToActivity (@NonNull FragmentManager fragmentManager,
+                                              @NonNull Fragment fragment, int frameId,String tag) {
+        checkNotNull(fragmentManager);
+        checkNotNull(fragment);
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left,R.anim.exit_to_right,R.anim.enter_to_left);
         transaction.replace(frameId, fragment);
+        transaction.addToBackStack(tag);
         transaction.commit();
     }
 

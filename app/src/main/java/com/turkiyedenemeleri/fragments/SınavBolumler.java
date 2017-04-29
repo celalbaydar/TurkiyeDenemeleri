@@ -11,6 +11,7 @@ import com.turkiyedenemeleri.base.BaseFragment;
 import com.turkiyedenemeleri.model.SınavBolum;
 import com.turkiyedenemeleri.presenter.SınavBolumPresenter;
 import com.turkiyedenemeleri.presenter.contract.SınavBolumContract;
+import com.turkiyedenemeleri.util.ActivityUtil;
 
 import java.util.ArrayList;
 
@@ -22,6 +23,7 @@ public class SınavBolumler extends BaseFragment<SınavBolumPresenter> implement
     String sınavId;
 
     public SınavBolumler() {
+
     }
 
     public static SınavBolumler newInstance(String sınavid) {
@@ -45,8 +47,14 @@ public class SınavBolumler extends BaseFragment<SınavBolumPresenter> implement
     @Override
     protected void initEventAndData() {
         sınavId=getArguments().getString("sınavid");
-        Log.e("deneme",getArguments().getString("sınavid"));
+        Log.e("deneme id",getArguments().getString("sınavid"));
         mPresenter.bolumGetir(sınavId);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
     }
 
     @Override
@@ -55,12 +63,21 @@ public class SınavBolumler extends BaseFragment<SınavBolumPresenter> implement
     }
 
     @Override
-    public void bolumlerGeldi(ArrayList<SınavBolum> bolumler) {
+    public void bolumlerGeldi(final ArrayList<SınavBolum> bolumler) {
         for (int i = 0; i < bolumler.size(); i++) {
             CardView cv = (CardView) mActivity.findViewById(cvID[i]);
             cv.setVisibility(View.VISIBLE);
             TextView text = (TextView) mActivity.findViewById(itemName[i]);
             text.setText(bolumler.get(i).getBölüm());
+            cv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ActivityUtil.addToBackStackFragmentToActivity(getFragmentManager(),SonucFragment.newInstance(),R.id.contentFrame,bolumler.get(0).getResimbase());
+                    Log.e("deneme", String.valueOf(getFragmentManager().getBackStackEntryCount()));
+
+                }
+            });
         }
+
     }
 }

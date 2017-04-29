@@ -13,17 +13,14 @@ import com.turkiyedenemeleri.fragments.SoruFragment;
  */
 
 public class SampleFragmentPagerAdapter extends FragmentStatePagerAdapter {
-    int PAGE_COUNT = 10;
+    int PAGE_COUNT = 40;
 
     private Context context;
 
 
     public SampleFragmentPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
-
-
     }
-
     @Override
     public int getCount() {
         return PAGE_COUNT;

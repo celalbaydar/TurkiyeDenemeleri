@@ -48,6 +48,7 @@ public abstract class BaseActivity <T extends BasePresenter> extends AppCompatAc
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        onCreateFirst();
         setContentView(getLayoutId());
         unbinder = ButterKnife.bind(this);
         mContext = this;
@@ -61,6 +62,10 @@ public abstract class BaseActivity <T extends BasePresenter> extends AppCompatAc
             mPresenter.attachView(this);
     }
 
+
+    protected void onCreateFirst(){
+
+    }
 
     public boolean isOnline() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

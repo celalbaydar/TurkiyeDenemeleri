@@ -46,7 +46,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements
         MainFragment newsFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
         if (newsFragment == null) {
             newsFragment = MainFragment.newInstance();
-            ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), newsFragment, R.id.contentFrame,null);
+            ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), newsFragment, R.id.contentFrame);
             navigationView.getMenu().getItem(0).setChecked(true);
         }
     }
@@ -81,6 +81,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -98,11 +99,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements
         int id = item.getItemId();
         if (id == R.id.nav_exams) {
             mainFragment = MainFragment.newInstance();
-            ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), mainFragment, R.id.contentFrame,"main");
+            ActivityUtil.addToBackStackFragmentToActivity(getSupportFragmentManager(), mainFragment, R.id.contentFrame, "main");
             navigationView.getMenu().getItem(0).setChecked(true);
         } else if (id == R.id.nav_results) {
             sonucFragment = SonucFragment.newInstance();
-            ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), sonucFragment, R.id.contentFrame,"sonuc");
+            ActivityUtil.addToBackStackFragmentToActivity(getSupportFragmentManager(), sonucFragment, R.id.contentFrame, "sonuc");
             navigationView.getMenu().getItem(0).setChecked(true);
         } else if (id == R.id.nav_about) {
 

@@ -3,17 +3,24 @@ package com.turkiyedenemeleri.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.turkiyedenemeleri.R;
 import com.turkiyedenemeleri.adapter.SampleFragmentPagerAdapter;
+import com.turkiyedenemeleri.adapter.SoruNumaraAdapter;
 import com.turkiyedenemeleri.base.BaseFragment;
 import com.turkiyedenemeleri.customviews.TDTextView;
 import com.turkiyedenemeleri.presenter.MainPresenter;
 
+import butterknife.BindView;
+
 
 public class SonucFragment extends BaseFragment<MainPresenter> {
 
+    @BindView(R.id.rcView)
+    RecyclerView rcView;
     private ViewPager viewPager;
     private TDTextView tdTextView;
 
@@ -51,21 +58,14 @@ public class SonucFragment extends BaseFragment<MainPresenter> {
         SampleFragmentPagerAdapter adapter = new SampleFragmentPagerAdapter(getFragmentManager(), getContext());
         viewPager.setAdapter(adapter);
 
-        tdTextView = (TDTextView) view.findViewById(R.id.tvRandom);
-        tdTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewPager.setCurrentItem(5,false);
-            }
-        });
+
     }
 
     @Override
     protected void initEventAndData() {
-
-
-
+        LinearLayoutManager llm = new LinearLayoutManager(mContext);
+        llm.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rcView.setLayoutManager(llm);
+        rcView.setAdapter(new SoruNumaraAdapter(40));
     }
-
-
 }

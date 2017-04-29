@@ -17,7 +17,7 @@ public class SinavActivity extends BaseActivity<SınavPresenter> implements Sın
         SınavBolumler newsFragment = (SınavBolumler) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
         if (newsFragment == null) {
             newsFragment = SınavBolumler.newInstance(sınavid);
-            ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), newsFragment, R.id.contentFrame,"sinav");
+            ActivityUtil.addToBackStackFragmentToActivity(getSupportFragmentManager(), newsFragment, R.id.contentFrame,"sinav");
         }
     }
 
@@ -33,6 +33,12 @@ public class SinavActivity extends BaseActivity<SınavPresenter> implements Sın
 
     @Override
     public void showError(int errorCode, String msg) {
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
 
     }
 }
