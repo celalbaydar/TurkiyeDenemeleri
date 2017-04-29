@@ -1,24 +1,20 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    tools:context="com.turkiyedenemeleri.fragments.SonucFragment">
+    tools:context="com.turkiyedenemeleri.fragments.SoruFragment">
 
+    <!-- TODO: Update blank fragment layout -->
     <com.turkiyedenemeleri.customviews.TDTextView
-        android:id="@+id/tvRandom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/font_xxhuge"
         app:tvFontName="Bold.otf"
         android:gravity="center"
+        android:id="@+id/qNoAsText"
+        android:layout_gravity="center"
         android:text="MERHABA"/>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
 
-</LinearLayout>
+</FrameLayout>

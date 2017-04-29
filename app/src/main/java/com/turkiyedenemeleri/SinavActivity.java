@@ -17,7 +17,7 @@ public class SinavActivity extends BaseActivity<SınavPresenter> implements Sın
         SınavBolumler newsFragment = (SınavBolumler) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
         if (newsFragment == null) {
             newsFragment = SınavBolumler.newInstance(sınavid);
-            ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), newsFragment, R.id.contentFrame);
+            ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), newsFragment, R.id.contentFrame,"sinav");
         }
     }
 
