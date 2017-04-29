@@ -100,14 +100,16 @@
                             android:textSize="@dimen/font_xlarge"
                             app:tvFontName="Regular.otf" />
 
-                        <com.turkiyedenemeleri.customviews.TDButton
+                        <com.turkiyedenemeleri.customviews.TDTextView
                             android:id="@+id/basla"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:background="@color/blue_btn_bg_color"
+                            android:gravity="center"
+                            android:background="@color/white"
                             android:drawableRight="@drawable/start_icon"
                             android:text="SINAVA\nBAŞLA"
+                            app:tvFontName="Bold.otf"
                             tools:ignore="RelativeOverlap" />
                     </LinearLayout>
                 </LinearLayout>

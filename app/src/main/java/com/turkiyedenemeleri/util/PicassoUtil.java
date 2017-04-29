@@ -27,7 +27,6 @@ public class PicassoUtil {
                 .load(BASE_URL+imageUrl)
                 .networkPolicy(NetworkPolicy.OFFLINE)
                 .placeholder(R.drawable.avatar_contact)
-                .error(R.drawable.avatar_contact)
                 .into(imageView, new Callback() {
                     @Override
                     public void onSuccess() {

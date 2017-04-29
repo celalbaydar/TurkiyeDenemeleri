@@ -6,6 +6,7 @@ import com.turkiyedenemeleri.app.Constants;
 import com.turkiyedenemeleri.model.MyHttpResponse;
 import com.turkiyedenemeleri.model.MyHttpResponseNoBody;
 import com.turkiyedenemeleri.model.Sınav;
+import com.turkiyedenemeleri.model.SınavBolum;
 import com.turkiyedenemeleri.model.User;
 import com.turkiyedenemeleri.model.http.api.SınavService;
 import com.turkiyedenemeleri.model.http.api.UyeService;
@@ -141,7 +142,9 @@ public class RetrofitHelper {
     public  Observable<MyHttpResponse<ArrayList<Sınav>>> getSınav(String token) {
         return sınavService.getSınav(token);
     }
-
+    public  Observable<ArrayList<SınavBolum>> getSınavBölüm(String token) {
+        return sınavService.getSınavBolum(token);
+    }
 
 
 }

@@ -3,6 +3,7 @@ package com.turkiyedenemeleri.model.http.api;
 import com.turkiyedenemeleri.model.MyHttpResponse;
 import com.turkiyedenemeleri.model.MyHttpResponseNoBody;
 import com.turkiyedenemeleri.model.Sınav;
+import com.turkiyedenemeleri.model.SınavBolum;
 
 import java.util.ArrayList;
 
@@ -23,5 +24,9 @@ public interface SınavService {
     @FormUrlEncoded
     @POST("sinavKayit.php")
     Observable<MyHttpResponseNoBody> sınavKayıt(@Field("token") String token, @Field("sınavid") String sınavid);
+
+    @FormUrlEncoded
+    @POST("getSınavBolum.php")
+    Observable<ArrayList<SınavBolum>> getSınavBolum(@Field("sınavid") String sınavid);
 
 }

@@ -19,7 +19,13 @@
     <color name="section_text">#ff00897b</color>
 
 
-
+    <color name="item_blue">#42A5F5</color>
+    <color name="item_green">#66BB6A</color>
+    <color name="item_dark_blue">#009688</color>
+    <color name="item_red">#F44336</color>
+    <color name="item_purple">#7E57C2</color>
+    <color name="item_pink">#EC407A</color>
+    <color name="item_yellow">#C0CA33</color>
 
 
 

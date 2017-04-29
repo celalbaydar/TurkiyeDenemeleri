@@ -9,8 +9,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.turkiyedenemeleri.ButtonClickListener;
 import com.turkiyedenemeleri.R;
 import com.turkiyedenemeleri.app.MyApp;
+import com.turkiyedenemeleri.customviews.TDTextView;
 import com.turkiyedenemeleri.customviews.star.LikeButtonView;
 import com.turkiyedenemeleri.model.Sınav;
 import com.turkiyedenemeleri.presenter.MainPresenter;
@@ -24,10 +26,11 @@ public class Sınavlar extends RecyclerView.Adapter<GenericViewHolder> {
     private final int SINAV_BASVURU = 0;
     private final int SINAVA_BASLA = 1;
     private String[] aylar = {"OCAK", "ŞUBAT", "MART", "NİSAN", "MAYIS", "HAZİRAN", "TEMMUZ", "AĞUSTOS", "EYLÜL", "EKİM", "KASIM", "ARALIK"};
-
-    public Sınavlar(ArrayList<Sınav> sınavlar, MainPresenter mPresenter) {
+    ButtonClickListener onClickListener;
+    public Sınavlar(ArrayList<Sınav> sınavlar, MainPresenter mPresenter, ButtonClickListener onClickListener) {
         this.sınavlar = sınavlar;
         this.mPresenter = mPresenter;
+        this.onClickListener=onClickListener;
     }
 
 
@@ -105,11 +108,9 @@ public class Sınavlar extends RecyclerView.Adapter<GenericViewHolder> {
                 like.setClickable(false);
             }
             like.setOnTouchListener((v, event) -> {
-                Log.d("denem","tıklandı2");
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     if (like.isClickable()) {
                         like.onClick(null);
-                        Log.d("denem","tıklandı");
                         mPresenter.addSınav(MyApp.loggedUserId, sınavlar.get(getAdapterPosition()).getSınavid());
                     }
                 }
@@ -120,23 +121,28 @@ public class Sınavlar extends RecyclerView.Adapter<GenericViewHolder> {
 
     public class SınavBasla extends GenericViewHolder {
         TextView tv_kisi, tv_sınav_adi, saat;
-        Button basla;
+        TDTextView basla;
 
         public SınavBasla(View view) {
             super(view);
             tv_sınav_adi = (TextView) view.findViewById(R.id.tv_sınav_adi);
             saat = (TextView) view.findViewById(R.id.saat);
             tv_kisi = (TextView) view.findViewById(R.id.tv_kisi);
-            basla = (Button) view.findViewById(R.id.like);
+            basla = (TDTextView) view.findViewById(R.id.basla);
         }
 
         @Override
-        public void setDataOnView(int position) {
+        public void setDataOnView(final int position) {
             String[] bitTarih = sınavlar.get(position).getBitis().split("[-:\\s]");
             tv_kisi.setText(sınavlar.get(position).getKayıtlıkullanıcı() + "kişi kaydoldu");
             saat.setText(bitTarih[3] + ":" + bitTarih[4]);
             tv_sınav_adi.setText(sınavlar.get(position).getAciklama());
-
+            basla.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickListener.onClickData(sınavlar.get(getAdapterPosition()).getSınavid());
+                }
+            });
         }
     }
 }

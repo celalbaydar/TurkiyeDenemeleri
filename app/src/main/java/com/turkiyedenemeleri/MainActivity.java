@@ -20,7 +20,7 @@ import butterknife.BindView;
 
 
 public class MainActivity extends BaseActivity<MainPresenter> implements
-        NavigationView.OnNavigationItemSelectedListener {
+        NavigationView.OnNavigationItemSelectedListener  {
 
     @BindView(R.id.nav_view)
     NavigationView navigationView;
@@ -41,7 +41,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements
         ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.ic_menu);
         ab.setDisplayHomeAsUpEnabled(true);
-
 
 
         MainFragment newsFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
@@ -65,7 +64,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
-
 
 
     }
@@ -93,7 +91,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements
     }
 
 
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -101,17 +98,13 @@ public class MainActivity extends BaseActivity<MainPresenter> implements
 
         int id = item.getItemId();
         if (id == R.id.nav_exams) {
-
-                 mainFragment=MainFragment.newInstance();
-                ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), mainFragment, R.id.contentFrame);
-                navigationView.getMenu().getItem(0).setChecked(true);
-
+            mainFragment = MainFragment.newInstance();
+            ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), mainFragment, R.id.contentFrame);
+            navigationView.getMenu().getItem(0).setChecked(true);
         } else if (id == R.id.nav_results) {
-
-                sonucFragment=SonucFragment.newInstance();
-                ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), sonucFragment, R.id.contentFrame);
-                navigationView.getMenu().getItem(0).setChecked(true);
-
+            sonucFragment = SonucFragment.newInstance();
+            ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), sonucFragment, R.id.contentFrame);
+            navigationView.getMenu().getItem(0).setChecked(true);
         } else if (id == R.id.nav_about) {
 
         }
@@ -120,8 +113,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
 
 
 }

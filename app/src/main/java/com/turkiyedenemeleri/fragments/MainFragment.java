@@ -1,12 +1,15 @@
 package com.turkiyedenemeleri.fragments;
 
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.turkiyedenemeleri.ButtonClickListener;
 import com.turkiyedenemeleri.R;
+import com.turkiyedenemeleri.SinavActivity;
 import com.turkiyedenemeleri.adapter.Sınavlar;
 import com.turkiyedenemeleri.app.MyApp;
 import com.turkiyedenemeleri.base.BaseFragment;
@@ -14,6 +17,7 @@ import com.turkiyedenemeleri.model.MyHttpResponseNoBody;
 import com.turkiyedenemeleri.model.Sınav;
 import com.turkiyedenemeleri.presenter.MainPresenter;
 import com.turkiyedenemeleri.presenter.contract.MainContract;
+import com.turkiyedenemeleri.util.ActivityUtil;
 
 import java.util.ArrayList;
 
@@ -24,7 +28,7 @@ import butterknife.BindView;
  * Use the {@link MainFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MainFragment extends BaseFragment<MainPresenter> implements MainContract.View {
+public class MainFragment extends BaseFragment<MainPresenter> implements MainContract.View,ButtonClickListener {
 
     @BindView(R.id.rcView)
     RecyclerView rcView;
@@ -62,7 +66,7 @@ public class MainFragment extends BaseFragment<MainPresenter> implements MainCon
 
     @Override
     public void sınavCompleted(ArrayList<Sınav> sınavlar) {
-        Sınavlar sınav = new Sınavlar(sınavlar,mPresenter);
+        Sınavlar sınav = new Sınavlar(sınavlar,mPresenter,this);
         rcView.setAdapter(sınav);
     }
 
@@ -71,5 +75,12 @@ public class MainFragment extends BaseFragment<MainPresenter> implements MainCon
         if (response.getResponseType() == 200)
             Toast.makeText(mActivity, "Başarılı", Toast.LENGTH_SHORT).show();
         else Toast.makeText(mActivity, "Sıkıntılı", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClickData(String data) {
+        Bundle bundle=new Bundle();
+        bundle.putString("sınavid",data);
+        ActivityUtil.startActivity(mActivity, SinavActivity.class,bundle);
     }
 }

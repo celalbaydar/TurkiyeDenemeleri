@@ -56,7 +56,6 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
         Fabric.with(this, new TwitterCore(authConfig), digitsBuilder.build());
         if (!Digits.isDigitsUser() || SharedPreferenceUtil.getLoggedUser() == null) {
             Digits.logout();
-            //startActivity(new Intent(this, WelcomeActivity.class));
         } else if (!SharedPreferenceUtil.isUserFillProfil()) {
             Gson gson = new Gson();
             MyApp.loggedUser = gson.fromJson(SharedPreferenceUtil.getLoggedUser(), User.class);
@@ -67,7 +66,6 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
             int flags = Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION;
             ActivityUtil.startActivity(mContext, MainActivity.class, flags);
         }
-        //Digits.logout();
 
     }
 
@@ -103,7 +101,6 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        // NOTE: delegate the permission handling to generated method
         WelcomeActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
 
     }
@@ -145,7 +142,9 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
 
     @Override
     public void showError(int errorCode, String msg) {
+        if (dialog!=null) dialog.dismiss();
         DialogUtil.addErrorDialog(this, "Oppppsss", msg).show();
+        Digits.logout();
     }
 
     @Override
