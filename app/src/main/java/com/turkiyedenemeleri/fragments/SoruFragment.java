@@ -4,6 +4,7 @@ package com.turkiyedenemeleri.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -20,15 +21,14 @@ public class SoruFragment extends BaseFragment<MainPresenter> {
     private ImageView imageView;
 
     public SoruFragment() {
-        // Required empty public constructor
 
     }
 
-
-
-    public static SoruFragment newInstance(int number) {
+    public static SoruFragment newInstance(String sınavid,String bölüm,int number) {
         Bundle bundle = new Bundle();
         bundle.putInt("no",number);
+        bundle.putString("sınavid",sınavid);
+        bundle.putString("bölüm",bölüm);
         SoruFragment fm = new SoruFragment();
         fm.setArguments(bundle);
         return fm;
@@ -57,7 +57,12 @@ public class SoruFragment extends BaseFragment<MainPresenter> {
         super.onViewCreated(view, savedInstanceState);
         int number=getArguments().getInt("no")+1;
         imageView = (ImageView) view.findViewById(R.id.soru);
-        new PicassoUtil(getContext()).loadImageWithCache("soru/1/matematik/"+number,imageView);
+
+        String bölüm=getArguments().getString("bölüm");
+        String sınavid=getArguments().getString("sınavid");
+
+        Log.e("deneme","soru/"+sınavid+"/"+bölüm+"/"+number);
+        new PicassoUtil(getContext()).loadImageWithCache("soru/"+sınavid+"/"+bölüm+"/"+number,imageView);
     }
 
     @Override

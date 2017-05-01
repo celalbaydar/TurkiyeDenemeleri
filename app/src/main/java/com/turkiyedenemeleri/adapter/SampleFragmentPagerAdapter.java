@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.util.Log;
 
 import com.turkiyedenemeleri.fragments.SoruFragment;
 
@@ -16,11 +15,15 @@ public class SampleFragmentPagerAdapter extends FragmentStatePagerAdapter {
     int PAGE_COUNT = 40;
 
     private Context context;
+    private String sınavid;
+    private String bölüm;
 
-
-    public SampleFragmentPagerAdapter(FragmentManager fm, Context context) {
+    public SampleFragmentPagerAdapter(FragmentManager fm, Context context,String sınavid, String bölüm) {
         super(fm);
+        this.sınavid=sınavid;
+        this.bölüm=bölüm;
     }
+
     @Override
     public int getCount() {
         return PAGE_COUNT;
@@ -28,8 +31,7 @@ public class SampleFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        Log.e("TAG",""+position);
-        return SoruFragment.newInstance(position);
+        return SoruFragment.newInstance(sınavid, bölüm, position);
     }
 
 }

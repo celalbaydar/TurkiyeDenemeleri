@@ -102,9 +102,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements
             ActivityUtil.addToBackStackFragmentToActivity(getSupportFragmentManager(), mainFragment, R.id.contentFrame, "main");
             navigationView.getMenu().getItem(0).setChecked(true);
         } else if (id == R.id.nav_results) {
-            sonucFragment = SonucFragment.newInstance();
-            ActivityUtil.addToBackStackFragmentToActivity(getSupportFragmentManager(), sonucFragment, R.id.contentFrame, "sonuc");
-            navigationView.getMenu().getItem(0).setChecked(true);
+
         } else if (id == R.id.nav_about) {
 
         }

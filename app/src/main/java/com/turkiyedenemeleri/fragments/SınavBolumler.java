@@ -69,11 +69,12 @@ public class SınavBolumler extends BaseFragment<SınavBolumPresenter> implement
             cv.setVisibility(View.VISIBLE);
             TextView text = (TextView) mActivity.findViewById(itemName[i]);
             text.setText(bolumler.get(i).getBölüm());
+            final int finalI = i;
             cv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ActivityUtil.addToBackStackFragmentToActivity(getFragmentManager(),SonucFragment.newInstance(),R.id.contentFrame,bolumler.get(0).getResimbase());
-                    Log.e("deneme", String.valueOf(getFragmentManager().getBackStackEntryCount()));
+                    ActivityUtil.addToBackStackFragmentToActivity(getFragmentManager(),SonucFragment.newInstance(sınavId,bolumler.get(finalI).getResimbase()),R.id.contentFrame,bolumler.get(0).getResimbase());
+                    Log.e("deneme", bolumler.get(finalI).getResimbase());
 
                 }
             });

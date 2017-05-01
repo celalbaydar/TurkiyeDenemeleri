@@ -31,8 +31,13 @@ public class SonucFragment extends BaseFragment<MainPresenter> {
 
 
 
-    public static SonucFragment newInstance() {
-        return new SonucFragment();
+    public static SonucFragment newInstance(String sınavid,String bölüm) {
+        Bundle bundle = new Bundle();
+        bundle.putString("sınavid",sınavid);
+        bundle.putString("bölüm",bölüm);
+        SonucFragment fm = new SonucFragment();
+        fm.setArguments(bundle);
+        return fm;
     }
 
 
@@ -55,9 +60,10 @@ public class SonucFragment extends BaseFragment<MainPresenter> {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
-        SampleFragmentPagerAdapter adapter = new SampleFragmentPagerAdapter(getFragmentManager(), getContext());
+        String sınavid=getArguments().getString("sınavid");
+        String bölüm=getArguments().getString("bölüm");
+        SampleFragmentPagerAdapter adapter = new SampleFragmentPagerAdapter(getFragmentManager(), getContext(),sınavid,bölüm);
         viewPager.setAdapter(adapter);
-
 
     }
 
