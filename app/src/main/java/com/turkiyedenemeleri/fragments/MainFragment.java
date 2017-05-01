@@ -1,6 +1,8 @@
 package com.turkiyedenemeleri.fragments;
 
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,6 +35,9 @@ public class MainFragment extends BaseFragment<MainPresenter> implements MainCon
     @BindView(R.id.rcView)
     RecyclerView rcView;
 
+    private AlarmManager alarmMgr;
+    private PendingIntent alarmIntent;
+
     public MainFragment() {
     }
 
@@ -57,6 +62,8 @@ public class MainFragment extends BaseFragment<MainPresenter> implements MainCon
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         rcView.setLayoutManager(llm);
         mPresenter.getSınav(MyApp.loggedUserId);
+
+
     }
 
     @Override

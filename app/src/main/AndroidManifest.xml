@@ -35,6 +35,8 @@
             android:theme="@style/Base.Theme.AppCompat" />
         <activity android:name=".ProfilActivity"></activity>
         <activity android:name=".SinavActivity"></activity>
+
+
     </application>
 
 </manifest>

@@ -88,5 +88,8 @@ public class SonucFragment extends BaseFragment<MainPresenter> {
         llm.setOrientation(LinearLayoutManager.HORIZONTAL);
         rcView.setLayoutManager(llm);
         rcView.setAdapter(new SoruNumaraAdapter(40));
+
+
+
     }
 }
