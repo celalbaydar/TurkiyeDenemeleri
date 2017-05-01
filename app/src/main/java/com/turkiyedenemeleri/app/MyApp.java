@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.onesignal.OneSignal;
 import com.turkiyedenemeleri.model.User;
+import com.turkiyedenemeleri.util.RxBus;
 
 /**
  * Created by safakesberk on 22/04/2017.
@@ -12,7 +13,7 @@ import com.turkiyedenemeleri.model.User;
 public class MyApp extends Application {
     public static String loggedUserId = "";
     public static User loggedUser ;
-
+    private static RxBus _rxBus;
     private static MyApp instance;
 
     @Override
@@ -28,6 +29,13 @@ public class MyApp extends Application {
 
     public static synchronized MyApp getInstance() {
         return instance;
+    }
+
+    public static RxBus getRxBus() {
+        if (_rxBus == null) {
+            _rxBus = new RxBus();
+        }
+        return _rxBus;
     }
 
 }

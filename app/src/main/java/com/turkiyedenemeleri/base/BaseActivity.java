@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.turkiyedenemeleri.R;
 import com.turkiyedenemeleri.base.listeners.ActionBarView;
+import com.turkiyedenemeleri.util.RxBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +35,7 @@ public abstract class BaseActivity <T extends BasePresenter> extends AppCompatAc
     protected T mPresenter;
 
     private Unbinder unbinder;
+
 
     protected abstract void setInitialValues();
     protected abstract void initViews();
@@ -140,5 +142,11 @@ public abstract class BaseActivity <T extends BasePresenter> extends AppCompatAc
         if (mPresenter != null)
             mPresenter.detachView();
     }
+
+
+
+
+
+
 
 }

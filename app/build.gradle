@@ -48,8 +48,11 @@ android {
         javaMaxHeapSize '6g'
     }
 
-    configurations.all {
-        resolutionStrategy.cacheDynamicVersionsFor 20, 'minutes'
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+        incremental false
+
     }
     packagingOptions {
         exclude 'META-INF/rxjava.properties'

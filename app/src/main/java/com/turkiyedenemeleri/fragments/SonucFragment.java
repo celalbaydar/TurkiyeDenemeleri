@@ -6,15 +6,20 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.turkiyedenemeleri.R;
 import com.turkiyedenemeleri.adapter.SampleFragmentPagerAdapter;
 import com.turkiyedenemeleri.adapter.SoruNumaraAdapter;
+import com.turkiyedenemeleri.app.Constants;
+import com.turkiyedenemeleri.app.MyApp;
+import com.turkiyedenemeleri.base.BaseEvent;
 import com.turkiyedenemeleri.base.BaseFragment;
 import com.turkiyedenemeleri.customviews.TDTextView;
 import com.turkiyedenemeleri.presenter.MainPresenter;
 
 import butterknife.BindView;
+import rx.functions.Action1;
 
 
 public class SonucFragment extends BaseFragment<MainPresenter> {
@@ -64,6 +69,16 @@ public class SonucFragment extends BaseFragment<MainPresenter> {
         String bölüm=getArguments().getString("bölüm");
         SampleFragmentPagerAdapter adapter = new SampleFragmentPagerAdapter(getFragmentManager(), getContext(),sınavid,bölüm);
         viewPager.setAdapter(adapter);
+
+        MyApp.getRxBus().toObserverable()
+                .subscribe(new Action1<BaseEvent>() {
+                    @Override
+                    public void call(BaseEvent event) {
+                        if(event.getEventCode()== Constants.clickEventCode) {
+                            Toast.makeText(mActivity, "hello" + ((int)event.getData()), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
     }
 

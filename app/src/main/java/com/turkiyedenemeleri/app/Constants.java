@@ -17,6 +17,8 @@ public class Constants {
     public static final String PATH_CACHE = PATH_DATA + "/NetCache";
 
 
+    public static final int clickEventCode=1000;
+
 
 
 }
