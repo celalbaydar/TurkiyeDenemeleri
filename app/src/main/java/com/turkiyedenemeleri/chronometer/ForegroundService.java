@@ -28,7 +28,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -51,6 +50,7 @@ public class ForegroundService extends Service {
 
             PrefUtils mPreferences = new PrefUtils(this);
             long wakeUpTime = (mPreferences.getStartedTime(intent.getStringExtra("sınavid")) + 1800) * 1000 ;
+            /*
             AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             Intent timerExpire = new Intent(this, TimerExpiredReceiver.class);
             PendingIntent sender = PendingIntent.getBroadcast(this, 0, timerExpire, PendingIntent.FLAG_CANCEL_CURRENT);
@@ -59,6 +59,7 @@ public class ForegroundService extends Service {
             } else {
                 am.set(AlarmManager.RTC_WAKEUP, wakeUpTime, sender);
             }
+            */
             Log.e("TAG","4 bitince servisi durduracak, broadcast");
 
 
