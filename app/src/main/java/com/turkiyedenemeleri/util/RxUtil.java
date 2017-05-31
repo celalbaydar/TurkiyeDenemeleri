@@ -13,12 +13,6 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class RxUtil {
 
-    /**
-     * 统一线程处理
-     *
-     * @return
-     */
-
 
     public static  <T> ObservableTransformer<T, T> rxSchedulerHelper() {
        return new ObservableTransformer<T,T>() {
@@ -29,31 +23,6 @@ public class RxUtil {
             }
         };
     }
-    /*
-    static <T> Observable <T> sampleObservable() {
-        return Observable.defer(new Callable<ObservableSource<T>>() {
-            @Override public ObservableSource<T> call() throws Exception {
-                return Observable.just(T);
-            }
-        });
-    public static <T> Observable.Transformer<MyHttpResponse<T>, T> handleMyResult() {   //compose判断结果
-        return new Observable.Transformer<MyHttpResponse<T>, T>() {
-            @Override
-            public Observable<T> call(Observable<MyHttpResponse<T>> httpResponseObservable) {
-                return httpResponseObservable.flatMap(new Func1<MyHttpResponse<T>, Observable<T>>() {
-                    @Override
-                    public Observable<T> call(MyHttpResponse<T> tMyHttpResponse) {
-                        if(tMyHttpResponse.getCode() == 200) {
-                            return createData(tMyHttpResponse.getData());
-                        } else {
-                            return Observable.error(new ApiException("服务器返回error"));
-                        }
-                    }
-                });
-            }
-        };
-    }
-*/
 
 
 }

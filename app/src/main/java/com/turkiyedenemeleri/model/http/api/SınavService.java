@@ -1,5 +1,6 @@
 package com.turkiyedenemeleri.model.http.api;
 
+import com.turkiyedenemeleri.model.CevapAnahtarı;
 import com.turkiyedenemeleri.model.MyHttpResponse;
 import com.turkiyedenemeleri.model.MyHttpResponseNoBody;
 import com.turkiyedenemeleri.model.Sınav;
@@ -28,5 +29,9 @@ public interface SınavService {
     @FormUrlEncoded
     @POST("getSınavBolum.php")
     Observable<ArrayList<SınavBolum>> getSınavBolum(@Field("sınavid") String sınavid);
+
+    @FormUrlEncoded
+    @POST("sinavCevapKayit.php")
+    Observable<MyHttpResponse<CevapAnahtarı>> sinavCevapKayit(@Field("sınavid") String sınavid, @Field("token") String token, @Field("cevap") String cevap);
 
 }

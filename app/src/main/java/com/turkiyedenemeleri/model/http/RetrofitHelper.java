@@ -3,6 +3,7 @@ package com.turkiyedenemeleri.model.http;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.turkiyedenemeleri.app.Constants;
+import com.turkiyedenemeleri.model.CevapAnahtarı;
 import com.turkiyedenemeleri.model.MyHttpResponse;
 import com.turkiyedenemeleri.model.MyHttpResponseNoBody;
 import com.turkiyedenemeleri.model.Sınav;
@@ -144,6 +145,9 @@ public class RetrofitHelper {
     }
     public  Observable<ArrayList<SınavBolum>> getSınavBölüm(String token) {
         return sınavService.getSınavBolum(token);
+    }
+    public  Observable<MyHttpResponse<CevapAnahtarı>> sinavKayit(String sinavId, String token, String cevap) {
+        return sınavService.sinavCevapKayit(sinavId,token,cevap);
     }
 
 
