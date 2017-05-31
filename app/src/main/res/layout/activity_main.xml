@@ -22,7 +22,6 @@
         app:itemTextColor="@color/selector_drawer_item"
         app:itemBackground="@android:color/transparent"
         app:itemTextAppearance="@style/TextAppearance.AppCompat.Large"
-        app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_home_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

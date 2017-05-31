@@ -4,17 +4,10 @@
     android:layout_height="match_parent"
     tools:context="com.turkiyedenemeleri.fragments.MainFragment">
 
-    <Button
-        android:id="@+id/deneme"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="@color/colorAccent"
-        android:layout_gravity="center"/>
     <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/rcView"
-         />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 
 

@@ -9,14 +9,19 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.turkiyedenemeleri.app.MyApp;
 import com.turkiyedenemeleri.base.BaseActivity;
+import com.turkiyedenemeleri.customviews.TDTextView;
 import com.turkiyedenemeleri.fragments.MainFragment;
 import com.turkiyedenemeleri.fragments.SonucFragment;
 import com.turkiyedenemeleri.presenter.MainPresenter;
 import com.turkiyedenemeleri.util.ActivityUtil;
+import com.turkiyedenemeleri.util.PicassoUtil;
 
 import butterknife.BindView;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class MainActivity extends BaseActivity<MainPresenter> implements
@@ -51,6 +56,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements
         }
     }
 
+
     @Override
     protected void initViews() {
         //   Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -58,6 +64,13 @@ public class MainActivity extends BaseActivity<MainPresenter> implements
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        View headerView = navigationView.inflateHeaderView(R.layout.nav_header_main);
+       CircleImageView imageView = (CircleImageView) headerView.findViewById(R.id.nav_profile_image);
+        TDTextView tvName = (TDTextView) headerView.findViewById(R.id.tvProfileName);
+        tvName.setText(MyApp.loggedUser.getKullaniciadi());
+       new PicassoUtil(this).loadImageWithCache("userphotos/"+MyApp.loggedUser.getResim_url(), imageView);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);

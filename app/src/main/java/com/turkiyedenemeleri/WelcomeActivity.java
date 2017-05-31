@@ -50,21 +50,23 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Gson gson = new Gson();
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Digits.Builder digitsBuilder = new Digits.Builder();
         Fabric.with(this, new TwitterCore(authConfig), digitsBuilder.build());
         if (!Digits.isDigitsUser() || SharedPreferenceUtil.getLoggedUser() == null) {
             Digits.logout();
         } else if (!SharedPreferenceUtil.isUserFillProfil()) {
-            Gson gson = new Gson();
+
             MyApp.loggedUser = gson.fromJson(SharedPreferenceUtil.getLoggedUser(), User.class);
             Log.e("TAG",SharedPreferenceUtil.getLoggedUser());
             int flags = Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK;
             ActivityUtil.startActivity(mContext, ProfilActivity.class, flags);
         } else {
             int flags = Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION;
+            MyApp.loggedUser = gson.fromJson(SharedPreferenceUtil.getLoggedUser(), User.class);
             ActivityUtil.startActivity(mContext, MainActivity.class, flags);
+
         }
 
     }
