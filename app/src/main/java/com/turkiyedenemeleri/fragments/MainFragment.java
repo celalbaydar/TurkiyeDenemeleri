@@ -38,6 +38,11 @@ public class MainFragment extends BaseFragment<MainPresenter> implements MainCon
     private AlarmManager alarmMgr;
     private PendingIntent alarmIntent;
 
+    @BindView(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
+
+
+
     public MainFragment() {
     }
 
@@ -63,8 +68,9 @@ public class MainFragment extends BaseFragment<MainPresenter> implements MainCon
         rcView.setLayoutManager(llm);
         mPresenter.getSınav(MyApp.loggedUserId);
 
-
+        mSwipeRefreshLayout.setOnRefreshListener(() -> mPresenter.getSınav(MyApp.loggedUserId));
     }
+
 
     @Override
     public void showError(int errorCode, String msg) {
@@ -73,6 +79,7 @@ public class MainFragment extends BaseFragment<MainPresenter> implements MainCon
 
     @Override
     public void sınavCompleted(ArrayList<Sınav> sınavlar) {
+        if (mSwipeRefreshLayout.isRefreshing()) mSwipeRefreshLayout.setRefreshing(false);
         Sınavlar sınav = new Sınavlar(sınavlar,mPresenter,this);
         rcView.setAdapter(sınav);
     }
