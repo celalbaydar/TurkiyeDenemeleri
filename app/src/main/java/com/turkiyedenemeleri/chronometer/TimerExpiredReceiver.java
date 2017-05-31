@@ -28,6 +28,7 @@ import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 
 import com.turkiyedenemeleri.MainActivity;
+import com.turkiyedenemeleri.app.Constants;
 
 
 public class TimerExpiredReceiver extends BroadcastReceiver {

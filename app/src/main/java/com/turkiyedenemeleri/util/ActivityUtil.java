@@ -60,5 +60,13 @@ public class ActivityUtil {
         transaction.addToBackStack(tag);
         transaction.commit();
     }
-
+    public static void replaceToBackStackFragmentToActivity (@NonNull FragmentManager fragmentManager,
+                                                         @NonNull Fragment fragment, int frameId) {
+        checkNotNull(fragmentManager);
+        checkNotNull(fragment);
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left,R.anim.exit_to_right,R.anim.enter_to_left);
+        transaction.replace(frameId, fragment);
+        transaction.commit();
+    }
 }

@@ -29,13 +29,13 @@ public class PrefUtils {
         mPreferences = PreferenceManager.getDefaultSharedPreferences(c);
     }
 
-    public long getStartedTime() {
-        return mPreferences.getLong(STARTED_TIME_ID, 0);
+    public long getStartedTime(String id) {
+        return mPreferences.getLong(id+STARTED_TIME_ID, 0);
     }
 
-    public void setStartedTime(long started) {
+    public void setStartedTime(String id,long started) {
         SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putLong(STARTED_TIME_ID, started);
+        editor.putLong(id+STARTED_TIME_ID, started);
         editor.apply();
     }
 }

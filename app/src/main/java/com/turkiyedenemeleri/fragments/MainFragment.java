@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Toast;
 
 import com.turkiyedenemeleri.ButtonClickListener;
@@ -15,6 +16,7 @@ import com.turkiyedenemeleri.SinavActivity;
 import com.turkiyedenemeleri.adapter.Sınavlar;
 import com.turkiyedenemeleri.app.MyApp;
 import com.turkiyedenemeleri.base.BaseFragment;
+import com.turkiyedenemeleri.chronometer.ChronometerActivity;
 import com.turkiyedenemeleri.model.MyHttpResponseNoBody;
 import com.turkiyedenemeleri.model.Sınav;
 import com.turkiyedenemeleri.presenter.MainPresenter;
@@ -24,6 +26,7 @@ import com.turkiyedenemeleri.util.ActivityUtil;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -89,5 +92,12 @@ public class MainFragment extends BaseFragment<MainPresenter> implements MainCon
         Bundle bundle=new Bundle();
         bundle.putString("sınavid",data);
         ActivityUtil.startActivity(mActivity, SinavActivity.class,bundle);
+    }
+
+
+    @OnClick(R.id.deneme)
+    public void deneme(View v){
+        ActivityUtil.startActivity(mActivity, ChronometerActivity.class);
+
     }
 }

@@ -91,6 +91,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements
     }
 
 
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

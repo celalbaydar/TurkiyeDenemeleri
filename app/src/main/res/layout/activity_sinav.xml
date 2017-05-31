@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context="com.turkiyedenemeleri.SinavActivity">
 
+    <FrameLayout
+        android:id="@+id/contentFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/toolbar" />
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -17,18 +26,34 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="0dp">
 
-        
+        <com.turkiyedenemeleri.customviews.TDTextView
+            android:id="@+id/kalan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|start"
+            android:layout_marginRight="10dp"
+            android:text="Kalan Süre"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_xxlarge"
+            app:tvFontName="Regular.otf" />
+
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:background="@mipmap/ic_launcher" />
 
+        <com.turkiyedenemeleri.customviews.TDTextView
+            android:id="@+id/karala"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginRight="10dp"
+            android:text="Karala"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_xxlarge"
+            android:visibility="invisible"
+            app:tvFontName="Regular.otf" />
     </android.support.v7.widget.Toolbar>
 
-    <FrameLayout
-        android:id="@+id/contentFrame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar" />
 </RelativeLayout>

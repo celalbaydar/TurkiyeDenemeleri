@@ -5,7 +5,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.turkiyedenemeleri.SinavActivity;
 import com.turkiyedenemeleri.fragments.SoruFragment;
+import com.turkiyedenemeleri.model.SoruData;
+
+import java.util.ArrayList;
 
 /**
  * Created by safakesberk on 29/04/2017.
@@ -17,11 +21,14 @@ public class SampleFragmentPagerAdapter extends FragmentStatePagerAdapter {
     private Context context;
     private String sınavid;
     private String bölüm;
+    ArrayList<SoruData> userCevap;
 
-    public SampleFragmentPagerAdapter(FragmentManager fm, Context context,String sınavid, String bölüm) {
+    public SampleFragmentPagerAdapter(FragmentManager fm, Context context, int soruSayısı, String sınavid, String bölüm) {
         super(fm);
-        this.sınavid=sınavid;
-        this.bölüm=bölüm;
+        this.PAGE_COUNT = soruSayısı;
+        this.sınavid = sınavid;
+        this.bölüm = bölüm;
+        userCevap= SinavActivity.cevaplar.get(sınavid+"-"+bölüm);
     }
 
     @Override
@@ -31,7 +38,8 @@ public class SampleFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return SoruFragment.newInstance(sınavid, bölüm, position);
+        return SoruFragment.newInstance(sınavid, bölüm, position,userCevap.get(position));
     }
+
 
 }

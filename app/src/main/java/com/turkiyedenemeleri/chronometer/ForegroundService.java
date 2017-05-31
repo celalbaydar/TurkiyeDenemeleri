@@ -35,6 +35,7 @@ import android.util.Log;
 
 import com.turkiyedenemeleri.MainActivity;
 import com.turkiyedenemeleri.R;
+import com.turkiyedenemeleri.app.Constants;
 
 public class ForegroundService extends Service {
     private static final String LOG_TAG = "ForegroundService";
@@ -47,8 +48,9 @@ public class ForegroundService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent.getAction().equals(Constants.ACTION.STARTFOREGROUND_ACTION)) {
+
             PrefUtils mPreferences = new PrefUtils(this);
-            long wakeUpTime = (mPreferences.getStartedTime() + 1800) * 1000 ;
+            long wakeUpTime = (mPreferences.getStartedTime(intent.getStringExtra("sınavid")) + 1800) * 1000 ;
             AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             Intent timerExpire = new Intent(this, TimerExpiredReceiver.class);
             PendingIntent sender = PendingIntent.getBroadcast(this, 0, timerExpire, PendingIntent.FLAG_CANCEL_CURRENT);
