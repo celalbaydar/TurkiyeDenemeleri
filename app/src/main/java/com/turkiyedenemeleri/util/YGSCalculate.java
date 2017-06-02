@@ -16,7 +16,6 @@ public class YGSCalculate {
     }
 
     public double getYgs1() {
-
         return format(100.160 + (ygsTrN * 1.999) + (ygsSosyalN * 1) + (ygsMatN * 3.998) + (ygsFenN * 2.999));
     }
 

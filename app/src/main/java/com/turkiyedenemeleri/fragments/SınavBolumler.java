@@ -107,10 +107,20 @@ public class SınavBolumler extends BaseFragment<SınavBolumPresenter> implement
     @Override
     public void cevapKayitSonuc(MyHttpResponse<CevapAnahtarı> cevap) {
         if (cevap.getResponseType() != 200) {
-            DialogUtil.addErrorDialog(mActivity,"Hata",cevap.getResponseMessage()).show();
-        }else{
-            Log.d("deneme",cevap.getData().getMatematikD()+" "+cevap.getData().getMatematikY());
+            DialogUtil.addErrorDialog(mActivity, "Hata", cevap.getResponseMessage()).show();
+        } else {
+            double matNet = netCalculate(Integer.valueOf(cevap.getData().getMatematikD()), Integer.valueOf(cevap.getData().getMatematikY()));
+            double sosNet = netCalculate(Integer.valueOf(cevap.getData().getSosyalD()), Integer.valueOf(cevap.getData().getSosyalY()));
+            double turkNet = netCalculate(Integer.valueOf(cevap.getData().getTurkceD()), Integer.valueOf(cevap.getData().getTurkceY()));
+            double fenNet = netCalculate(Integer.valueOf(cevap.getData().getFenD()), Integer.valueOf(cevap.getData().getFenY()));
+
+            SinavSonucuFragment sonucFragment = SinavSonucuFragment.newInstance(turkNet,sosNet,matNet,fenNet);
+            sonucFragment.show(getFragmentManager(),"TAG");
         }
+    }
+
+    private double netCalculate(int t, int f) {
+        return t - (f * 0.25);
     }
 
     private void addBolumler() {
