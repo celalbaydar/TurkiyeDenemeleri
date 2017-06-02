@@ -32,7 +32,18 @@ public class DialogUtil {
                     }
                 });
     }
-
+    public static SweetAlertDialog addSuccessDialog(Context context, String title, String content) {
+        return new SweetAlertDialog(context,SweetAlertDialog.SUCCESS_TYPE)
+                .setTitleText(title)
+                .setContentText(content)
+                .setConfirmText("Anladım!")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        sDialog.dismissWithAnimation();
+                    }
+                });
+    }
     public Dialog addKaralaScreen(Context context, String url, CanvasView canvas) {
         Dialog karalama;
         RelativeLayout relativeLayout;

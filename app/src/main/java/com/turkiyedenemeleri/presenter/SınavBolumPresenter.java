@@ -25,4 +25,12 @@ public class SınavBolumPresenter extends RxPresenter<SınavBolumContract.View> 
                 .subscribe(sınavBolum -> mView.bolumlerGeldi(sınavBolum));
         addSubscribe(rxSubscription);
     }
+
+    @Override
+    public void sınavKayit(String sınavid, String token, String cevap) {
+        Disposable rxSubscription = mRetrofitHelper.sinavKayit(sınavid,token,cevap)
+                .compose(RxUtil.rxSchedulerHelper())
+                .subscribe(sınavBolum -> mView.cevapKayitSonuc(sınavBolum));
+        addSubscribe(rxSubscription);
+    }
 }

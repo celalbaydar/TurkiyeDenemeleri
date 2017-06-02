@@ -2,6 +2,7 @@ package com.turkiyedenemeleri.fragments;
 
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -13,15 +14,21 @@ import com.turkiyedenemeleri.app.Constants;
 import com.turkiyedenemeleri.app.MyApp;
 import com.turkiyedenemeleri.base.BaseEvent;
 import com.turkiyedenemeleri.base.BaseFragment;
+import com.turkiyedenemeleri.model.CevapAnahtarı;
+import com.turkiyedenemeleri.model.MyHttpResponse;
 import com.turkiyedenemeleri.model.SoruData;
 import com.turkiyedenemeleri.model.SınavBolum;
 import com.turkiyedenemeleri.presenter.SınavBolumPresenter;
 import com.turkiyedenemeleri.presenter.contract.SınavBolumContract;
 import com.turkiyedenemeleri.util.ActivityUtil;
+import com.turkiyedenemeleri.util.DialogUtil;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import static com.turkiyedenemeleri.SinavActivity.cevaplar;
 
 
 public class SınavBolumler extends BaseFragment<SınavBolumPresenter> implements SınavBolumContract.View {
@@ -67,6 +74,21 @@ public class SınavBolumler extends BaseFragment<SınavBolumPresenter> implement
             addBolumler();
         }
         MyApp.getRxBus().send(new BaseEvent(Constants.hidekarala, null));
+
+        CardView cv = (CardView) mActivity.findViewById(R.id.bitir);
+        cv.setOnClickListener(v -> {
+            HashMap<String, ArrayList<String>> gsonHashMap = new HashMap<>();
+            for (int i = 0; i < bolumler.size(); i++) {
+                ArrayList<SoruData> temp = SinavActivity.cevaplar.get(sınavId + "-" + bolumler.get(i).getResimbase());
+                ArrayList<String> gsonArrayList = new ArrayList<>();
+                for (SoruData s : temp) {
+                    gsonArrayList.add(s.getCevap());
+                }
+                gsonHashMap.put(bolumler.get(i).getResimbase(), gsonArrayList);
+            }
+            mPresenter.sınavKayit(sınavId, MyApp.loggedUserId, gson.toJson(gsonHashMap));
+            Log.d("deneme", gson.toJson(gsonHashMap));
+        });
     }
 
 
@@ -80,6 +102,15 @@ public class SınavBolumler extends BaseFragment<SınavBolumPresenter> implement
         this.bolumler = bolumler;
         addBolumler();
         addBosCevap();
+    }
+
+    @Override
+    public void cevapKayitSonuc(MyHttpResponse<CevapAnahtarı> cevap) {
+        if (cevap.getResponseType() != 200) {
+            DialogUtil.addErrorDialog(mActivity,"Hata",cevap.getResponseMessage()).show();
+        }else{
+            Log.d("deneme",cevap.getData().getMatematikD()+" "+cevap.getData().getMatematikY());
+        }
     }
 
     private void addBolumler() {
@@ -102,14 +133,14 @@ public class SınavBolumler extends BaseFragment<SınavBolumPresenter> implement
     private void addBosCevap() {
         for (int i = 0; i < bolumler.size(); i++) {
 
-            if (SinavActivity.cevaplar.get(sınavId + "-" + bolumler.get(i).getResimbase()) != null)
+            if (cevaplar.get(sınavId + "-" + bolumler.get(i).getResimbase()) != null)
                 continue;
 
             ArrayList<SoruData> sınavSoruları = new ArrayList<>();
             for (int j = 0; j < bolumler.get(i).getSorusayısı(); j++) {
                 sınavSoruları.add(new SoruData());
             }
-            SinavActivity.cevaplar.put(sınavId + "-" + bolumler.get(i).getResimbase(), sınavSoruları);
+            cevaplar.put(sınavId + "-" + bolumler.get(i).getResimbase(), sınavSoruları);
         }
     }
 }
