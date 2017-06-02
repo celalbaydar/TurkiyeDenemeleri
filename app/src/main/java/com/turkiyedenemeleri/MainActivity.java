@@ -15,7 +15,7 @@ import com.turkiyedenemeleri.app.MyApp;
 import com.turkiyedenemeleri.base.BaseActivity;
 import com.turkiyedenemeleri.customviews.TDTextView;
 import com.turkiyedenemeleri.fragments.MainFragment;
-import com.turkiyedenemeleri.fragments.SonucFragment;
+import com.turkiyedenemeleri.fragments.SinavSonucuFragment;
 import com.turkiyedenemeleri.presenter.MainPresenter;
 import com.turkiyedenemeleri.util.ActivityUtil;
 import com.turkiyedenemeleri.util.PicassoUtil;
@@ -32,7 +32,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     MainFragment mainFragment;
-    SonucFragment sonucFragment;
+
 
 
     @Override
@@ -53,6 +53,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements
             newsFragment = MainFragment.newInstance();
             ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), newsFragment, R.id.contentFrame);
             navigationView.getMenu().getItem(0).setChecked(true);
+
+
         }
     }
 
@@ -104,6 +106,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements
     }
 
 
+    SinavSonucuFragment sonucFragment;
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -116,6 +119,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements
             ActivityUtil.addToBackStackFragmentToActivity(getSupportFragmentManager(), mainFragment, R.id.contentFrame, "main");
             navigationView.getMenu().getItem(0).setChecked(true);
         } else if (id == R.id.nav_results) {
+            sonucFragment = SinavSonucuFragment.newInstance(30.0,20.0,30.0,20.0);
+            sonucFragment.show(getSupportFragmentManager(),"TAG");
+
 
         } else if (id == R.id.nav_about) {
 
